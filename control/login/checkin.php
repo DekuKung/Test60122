@@ -15,7 +15,7 @@ session_start();
 
     if($result) {
         if($result["M_Status"]==1) {
-            $_SESSION["status"] = 'Admin';
+            $_SESSION["status"] = 'Administator (ผู้ดูแลระบบ)';
             $_SESSION["id"] = $result["id"];
             $_SESSION["cart_item"] = '';
             header("location: ../../page/admin/dashbroad/Main.php");
@@ -29,7 +29,7 @@ session_start();
             $fname = $_SESSION["Fname"];
             $lname = $_SESSION["Lname"];
             $_SESSION["cart_member"] = '';
-            header("location: ./Member/MainMember.php");
+            header("location: ../../page/member/profile/Main.php");
         }
         else {
             echo "<script>";

@@ -10,38 +10,7 @@ if(!$_SESSION["status"]){
     }        
 }else{
 include '../../../control/connect/condb.php';
-$id = $_SESSION["id"];
-$sql = "SELECT * FROM buy AS A INNER JOIN buy_detail AS B ON A.B_id = B.B_id INNER JOIN stock_product AS C ON A.P_id = C.P_id INNER JOIN member AS D ON A.M_id = D.id";
-$today = "SELECT A.id , A.M_Fname, A.M_Lname, A.M_Add, A.M_Tel, C.B_date, COUNT(B.B_id) AS Total, SUM(C.B_total) AS Totalbuy FROM member AS A LEFT JOIN buy AS B ON A.id = B.M_id INNER JOIN buy_detail AS C ON B.B_id = C.B_id WHERE C.B_date = CURDATE()";
-$query = $condb->query($sql);
-$querytoday = $condb->query($today);
-$sqlstock = "SELECT * FROM stock_product";
-$qchecks = $condb->query($sqlstock);
-while ($rows = mysqli_fetch_array($qchecks,MYSQLI_ASSOC)){
-    if($rows["P_amount"] == 0){
-        $alert = "ตอนนี้ ".$rows["P_name"]." หมดแล้ว ";
-        echo "<script>";
-        echo "alert('$alert');";
-        echo "</script>";
-}else if($rows["P_amount"] < 10){
-        $alert = "ตอนนี้ ".$rows["P_name"]." เหลือแค่ ".$rows["P_amount"]." แก้ว กรุณาเติมสินค้า";
-        echo "<script>";
-        echo "alert('$alert');";
-        echo "</script>";
-}
-}
-// totalBuy
-$sqltotalbuy = "SELECT COUNT(A.id) AS Totalbuy FROM buy AS A";
-$totalbuy = $condb->query($sqltotalbuy);
-//totalbooking
-$sqltotalbo = "SELECT COUNT(A.id) AS Totalbooking FROM booking AS A";
-$totalbo = $condb->query($sqltotalbo);
-//totalmember
-$sqltotalm = "SELECT COUNT(A.id) AS Total FROM member AS A WHERE A.M_Status = 2";
-$totalm = $condb->query($sqltotalm);
-//totalstock
-$sqltotalst = "SELECT SUM(A.P_amount) AS Totalstock FROM stock_product AS A";
-$totalst = $condb->query($sqltotalst);
+$sql = "SELECT * FROM member";
 ?>
 <!doctype html>
 <html lang="en">
@@ -71,10 +40,8 @@ $totalst = $condb->query($sqltotalst);
 <?php include './Sidebar.php'; ?>
 <!-- Page Content  -->
     <div id="content" class="p-4 p-md-5 pt-5">
-<!-- Card Content  -->
- <?php include './CardStatus.php'; ?>
   <!-- Table Member -->
-  <?php include './TableStatus.php'; ?>
+  <?php include './Table.php'; ?>
     <!-- END Page Content  -->
     </div>
     <!-- JQuery -->

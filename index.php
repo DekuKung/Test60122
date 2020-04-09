@@ -18,8 +18,8 @@
       <h2 class="active">เข้าสู่ระบบ</h2>
     <!-- Login Form -->
     <form action="./control/login/checkin.php" method="POST">
-      <input type="text" id="user" class="fadeIn second" name="user"  placeholder="ชื่อผู้ใช้" onblur="checkuser();" required>
-      <input type="password" id="pass" class="fadeIn third" name="pass" placeholder="รหัสผ่าน" onblur="checkpass();" required>
+      <input type="text" id="user" class="fadeIn second" name="user"  placeholder="ชื่อผู้ใช้" onblur="checkuser();" required oninvalid="this.setCustomValidity('กรุณากรอกชื่อผู้ใช้')">
+      <input type="password" id="pass" class="fadeIn third" name="pass" placeholder="รหัสผ่าน" onblur="checkpass();" required oninvalid="this.setCustomValidity('กรุณากรอกรหัสผ่าน')">
       <input type="submit" class="fadeIn fourth" value="เข้าสู่ระบบ">
     </form>
   </div>
