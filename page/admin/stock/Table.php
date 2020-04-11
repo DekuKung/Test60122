@@ -22,7 +22,7 @@
         			<tr>
 						<td align="center"><img src="../../../pic/<?php echo $result["P_image"]; ?>"></td>
 						<td><?php echo $result['P_name'];?></td>
-            			<td><?php echo $result['P_amount']; ?></td>
+            			<td><?php echo $result['P_amount']." แก้ว"; ?></td>
 						<td><?php echo $result['P_price']." บาท"; ?></td>
 						<td align="center"><a href="#" data-target="#editModal<?php echo $result['id'];?>" class="btn btn btn-success" data-toggle="modal">นำเข้าสินค้า</a>
             			<a href="#" data-target="#deleteModal<?php echo $result['id']; ?>" class="btn btn btn-danger" data-toggle="modal" >ลบข้อมูล</a></td>

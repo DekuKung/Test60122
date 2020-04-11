@@ -26,8 +26,6 @@ session_start();
             $_SESSION["id"] = $result["id"];
             $_SESSION["Fname"] = $result["M_Fname"];
             $_SESSION["Lname"] = $result["M_Lname"];
-            $fname = $_SESSION["Fname"];
-            $lname = $_SESSION["Lname"];
             $_SESSION["cart_member"] = '';
             header("location: ../../page/member/profile/Main.php");
         }
