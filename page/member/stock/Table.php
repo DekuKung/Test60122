@@ -3,7 +3,7 @@
 <!-- <div class="form-group">
     <a href="#addModal" data-toggle="modal" class="btn btn btn-primary">เพิ่มสินค้าหน้าร้าน</a>
 </div> -->
-<div class="card mb-4">
+<div class="card mb-6">
     	<div class="card-header"><i class="fa fa-table mr-1"></i>ตารางจัดการข้อมูล สินค้าหน้าร้าน</div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -20,10 +20,10 @@
                 	<tbody>
 						<?php while($result = mysqli_fetch_array($query,MYSQLI_ASSOC)) { ?>
         			<tr>
-						<td align="center"><img src="../../../pic/<?php echo $result["P_image"]; ?>"></td>
-						<td><?php echo $result['P_name'];?></td>
-            			<td><?php echo $result['P_amount']." แก้ว"; ?></td>
-						<td><?php echo $result['P_price']." บาท"; ?></td>
+						<td align="center"><img src="../../../pic/<?php echo $result["image"]; ?>"></td>
+						<td><?php echo $result['name'];?></td>
+            			<td><?php echo $result['amount']." แก้ว"; ?></td>
+						<td><?php echo $result['price']." บาท"; ?></td>
 						<td align="center"><a href="#" data-target="#editModal<?php echo $result['id'];?>" class="btn btn btn-success" data-toggle="modal">นำเข้าสินค้า</a>
             			<!-- <a href="#" data-target="#deleteModal<?php echo $result['id']; ?>" class="btn btn btn-danger" data-toggle="modal" >ลบข้อมูล</a> -->
                         </td>
@@ -44,7 +44,7 @@
 					</div>
 					<div class="form-group">
 						<label></label>
-						<input type="text" value="<?php echo $result['P_name'];?>" name="pname" id="pname" class="form-control" onchange="checkpname();" maxlength="25" minlength="2" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')" readonly><p id="pn"></p>
+						<input type="text" value="<?php echo $result['name'];?>" name="pname" id="pname" class="form-control" onchange="checkpname();" maxlength="25" minlength="2" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')" readonly><p id="pn"></p>
 					</div>
 					<div class="form-group">
 						<label>จำนวนที่นำเข้า</label>
@@ -57,7 +57,7 @@
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="ยกเลิก">
-						<input type="submit" class="btn btn-success" value="แก้ไข">
+						<input type="submit" class="btn btn-success" value="อัพเดต">
 					</div>
 				</form>
 			</div>
@@ -75,9 +75,9 @@
 					</div>
 					<div class="modal-body">
 						<p>รหัส : <?php echo $result['id']; ?></p>
-                        <p>ชื่อ  : <?php echo $result['P_name'];?></p>
-                        <p>จำนวน : <?php echo $result['P_amount']; ?></p>
-						<p>ราคา : <?php echo $result['P_price']; ?></p>
+                        <p>ชื่อ  : <?php echo $result['name'];?></p>
+                        <p>จำนวน : <?php echo $result['amount']; ?></p>
+						<p>ราคา : <?php echo $result['price']; ?></p>
 					</div>
 					<div class="modal-footer">
 						<a name="del" id="del" class="btn btn-danger" href="../../../control/stock/Delete.php?delid=<?php echo $result['id']; ?>" role="button" value="Delete">ยืนยัน</a>

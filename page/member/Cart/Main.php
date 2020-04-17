@@ -18,7 +18,7 @@ $result = mysqli_fetch_array($qcheck,MYSQLI_ASSOC);
 if(!empty($_GET["action"])) {
     switch($_GET["action"]) {
         case "add":
-            if($_POST["quantity"] > $result["P_amount"]){
+            if($_POST["quantity"] > $result["amount"]){
                 echo "<script>";
                 echo "window.alert('สินค้าในคลังไม่เพียงพอ');";
                 echo "</script>";
@@ -28,7 +28,7 @@ if(!empty($_GET["action"])) {
             else{
             if(!empty($_POST["quantity"])) {
                 $productByCode = $db_handle->runQuery("SELECT * FROM stock_product WHERE id = '".$_GET["id"]."' ");
-                $itemArray = array($productByCode[0]["id"]=>array('name'=>$productByCode[0]["P_name"], 'id'=>$productByCode[0]["id"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["P_price"],));
+                $itemArray = array($productByCode[0]["id"]=>array('name'=>$productByCode[0]["name"], 'id'=>$productByCode[0]["id"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"],));
 
             if(!empty($_SESSION["cart_item"])) {
                 if(in_array($productByCode[0]["id"], array_keys($_SESSION["cart_item"]))) {

@@ -23,3 +23,4 @@ $('.DataTable').DataTable({
         }
     }
 });
+

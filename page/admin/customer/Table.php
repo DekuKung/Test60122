@@ -20,16 +20,16 @@
                 	<tbody>
 						<?php while($result = mysqli_fetch_array($query,MYSQLI_ASSOC)) { ?>
         			<tr>
-						<td><?php echo $result['id']; ?></td>
+						<td><?php echo $result['C_id']; ?></td>
 						<td><?php echo $result['C_name'];?></td>
             			<td><?php echo $result['C_add']; ?></td>
 						<td><?php echo $result['C_tel']; ?></td>
-						<td align="center"><a href="#" data-target="#editEmployeeModal<?php echo $result['id'];?>" class="btn btn btn-warning" data-toggle="modal">แก้ไขข้อมูล</a>
-            			<a href="#" data-target="#deleteEmployeeModal<?php echo $result['id']; ?>" class="btn btn btn-danger" data-toggle="modal" >ลบข้อมูล</a></td>
+						<td align="center"><a href="#" data-target="#editEmployeeModal<?php echo $result['C_id'];?>" class="btn btn btn-warning" data-toggle="modal">แก้ไขข้อมูล</a>
+            			<a href="#" data-target="#deleteEmployeeModal<?php echo $result['C_id']; ?>" class="btn btn btn-danger" data-toggle="modal" >ลบข้อมูล</a></td>
 
 					</tr>
 					<!-- Edit Modal HTML -->
-	<div id="editEmployeeModal<?php echo $result['id'];?>" class="modal fade" >
+	<div id="editEmployeeModal<?php echo $result['C_id'];?>" class="modal fade" >
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form method="POST" action="../../../control/customer/Edit.php">
@@ -40,7 +40,7 @@
 					<div class="modal-body">
 					<div class="form-group">
 						<label></label>
-						<input  type="hidden" value="<?php echo $result['id'];?>" name="id" id="id" class="form-control" readonly required>
+						<input  type="hidden" value="<?php echo $result['C_id'];?>" name="id" id="id" class="form-control" readonly required>
 					</div>
 						<div class="form-group">
 							<label>ชื่อ</label>
@@ -65,7 +65,7 @@
 	</div>
 	<!--End Edit Modal -->
 	<!-- Delete Modal HTML -->
-	<div id="deleteEmployeeModal<?php echo $result['id']; ?>" name="delete" class="modal fade">
+	<div id="deleteEmployeeModal<?php echo $result['C_id']; ?>" name="delete" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form method="POST">
@@ -74,13 +74,13 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-						<p>รหัสลูกค้า : <?php echo $result['id']; ?></p>
+						<p>รหัสลูกค้า : <?php echo $result['C_id']; ?></p>
                         <p>ชื่อ : <?php echo $result['C_name'];?></p>
                         <p>ที่อยู่ : <?php echo $result['C_add']; ?></p>
 						<p>เบอร์โทร : <?php echo $result['C_tel']; ?></p>
 					</div>
 					<div class="modal-footer">
-						<a name="del" id="del" class="btn btn-danger" href="../../../control/customer/Delete.php?delid=<?php echo $result['id']; ?>" role="button" value="Delete">ยืนยัน</a>
+						<a name="del" id="del" class="btn btn-danger" href="../../../control/customer/Delete.php?delid=<?php echo $result['C_id']; ?>" role="button" value="Delete">ยืนยัน</a>
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="ยกเลิก">
 					</div>
 				</form>

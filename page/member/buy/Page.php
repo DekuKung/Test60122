@@ -31,7 +31,7 @@
     </div>			
 </div>
     <!-- Modal -->
-<form class="pay"  method="POST" action="../../control/buy/AddBuy.php">
+<form class="pay"  method="POST" action="../../../control/buy/Add.php">
 <div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

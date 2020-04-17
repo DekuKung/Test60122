@@ -20,10 +20,10 @@
                 	<tbody>
 						<?php while($result = mysqli_fetch_array($query,MYSQLI_ASSOC)) { ?>
         			<tr>
-						<td align="center"><img src="../../../pic/<?php echo $result["P_image"]; ?>"></td>
-						<td><?php echo $result['P_name'];?></td>
-            			<td><?php echo $result['P_amount']." แก้ว"; ?></td>
-						<td><?php echo $result['P_price']." บาท"; ?></td>
+						<td align="center"><img src="../../../pic/<?php echo $result["image"]; ?>"></td>
+						<td><?php echo $result['name'];?></td>
+            			<td><?php echo $result['amount']." แก้ว"; ?></td>
+						<td><?php echo $result['price']." บาท"; ?></td>
 						<td align="center"><a href="#" data-target="#editModal<?php echo $result['id'];?>" class="btn btn btn-success" data-toggle="modal">นำเข้าสินค้า</a>
             			<a href="#" data-target="#deleteModal<?php echo $result['id']; ?>" class="btn btn btn-danger" data-toggle="modal" >ลบข้อมูล</a></td>
 					</tr>
@@ -43,7 +43,7 @@
 					</div>
 					<div class="form-group">
 						<label></label>
-						<input type="text" value="<?php echo $result['P_name'];?>" name="pname" id="pname" class="form-control" onchange="checkpname();" maxlength="25" minlength="2" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')" readonly><p id="pn"></p>
+						<input type="text" value="<?php echo $result['name'];?>" name="pname" id="pname" class="form-control" onchange="checkpname();" maxlength="25" minlength="2" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')" readonly><p id="pn"></p>
 					</div>
 					<div class="form-group">
 						<label>จำนวนที่นำเข้า</label>

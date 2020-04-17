@@ -1,6 +1,6 @@
 <?php
 session_start();
-//error_reporting(0);
+error_reporting(0);
 if(!$_SESSION["status"]){
     if(!$_SESSION["id"]){
         echo "<script>";
@@ -15,11 +15,24 @@ $total_buy = 0;
 $total_amount = 0;
 $item_details = '';
 
+$cid = "SELECT * FROM buy";
+$q = $condb->query($cid);
+$result = mysqli_fetch_array($q, MYSQLI_ASSOC);
+// echo $result["id"];
+if($result["id"] == 0){
+  $count = 1;
+  // echo $count;
+}else{
+  $count = $result["id"]+1;
+  // echo $count;
+}
+
 $order_details = '
 <div class="table-responsive" id="order_table">
  <table class="table table-bordered table-striped">
  <thead>
  <tr>
+   <th>รหัสการซื้อที่</th>
   <th>รหัสสินค้า</th>
    <th>สินค้า</th>
    <th>จำนวน</th>
@@ -37,6 +50,7 @@ foreach($_SESSION["cart_item"] as $item) {
     
   $order_details .= '
   <tr>
+  <td>'. $count .'</td>
   <td>'. $item['id'] .'</td>
   <td>'. $item['name'] .'</td>
   <td>'.$item['quantity'].'</td>
@@ -105,6 +119,30 @@ img
     <script src="../../../js/main.js"></script> 
     <script src="../../../js/popper.js"></script>
     <script src="../../../js/bootstrap.min.js"></script>
+    <script>
+          $(document).ready(function(){
+    // Get value on a click and show alert
+    $("#btn").click(function(){
+      var str = $("#pay").val();
+      var num = $("#total").val();
+      var minus = str - num;
+      if(str>=num){
+      $("p.number").text(str);
+      $("p.total").text(num);
+      $("p.money").text(minus);
+      $("#success").show();
+      }
+      else {
+      alert("กรุณากรอกค่ามากกว่าราคา");
+      $("p.number").text("กลับไปหน้าเดิม");
+      $("p.total").text("กลับไปหน้าเดิม");
+      $("p.money").text("กลับไปหน้าเดิม");      
+      $("#success").hide();
+      } 
+
+        });
+    });
+    </script>
 </body>
 
 </html>

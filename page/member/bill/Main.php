@@ -9,9 +9,31 @@ if(!$_SESSION["status"]){
         echo "</script>";
     }        
 }else{
+$id = $_SESSION["id"];
 include '../../../control/connect/condb.php';
-$sql = "SELECT * FROM stock_product";
+$sql = "SELECT * FROM booking AS A
+INNER JOIN member AS B 
+ON A.M_id = B.M_id
+INNER JOIN customer AS C 
+ON A.C_id = C.C_id
+INNER JOIN get_tb AS D 
+ON A.get_id = D.get_id
+INNER JOIN bill_tb AS E 
+ON A.bill_id = E.bill_id
+WHERE A.M_id = '".$id."' AND A.bill_id = 1 ";
+
+$sql2="SELECT * FROM booking AS A
+INNER JOIN member AS B 
+ON A.M_id = B.M_id
+INNER JOIN customer AS C 
+ON A.C_id = C.C_id
+INNER JOIN get_tb AS D 
+ON A.get_id = D.get_id
+INNER JOIN bill_tb AS E 
+ON A.bill_id = E.bill_id
+WHERE A.M_id = '".$id."' AND A.bill_id = 2 ";
 $query = $condb->query($sql);
+$query2 = $condb->query($sql2);
 ?>
 <!doctype html>
 <html lang="en">
@@ -42,6 +64,8 @@ img
     <div id="content" class="p-4 p-md-5 pt-5">
   <!-- Table Member -->
   <?php include './Table.php'; ?>
+  <br>
+  <?php include './Table2.php'; ?>
     <!-- END Page Content  -->
     </div>
     <!-- JQuery -->
@@ -54,6 +78,14 @@ img
     <script src="../../../js/popper.js"></script>
     <script src="../../../js/bootstrap.min.js"></script>\
     <script>
+    $(document).ready(function () {
+        $('#confirm').on("click", function(){
+            var id = $('#confirm').val();
+            alert(id);
+            // $('#billModal').modal("show");
+        });
+    });
+
         $('#Ptable').dataTable({
             "oLanguage": {
             "sEmptyTable": "ไม่มีข้อมูลในตาราง",
@@ -82,6 +114,33 @@ img
         }
     });
 
+    $('#billtable').dataTable({
+            "oLanguage": {
+            "sEmptyTable": "ไม่มีข้อมูลในตาราง",
+            "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
+            "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 แถว",
+            "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกแถว)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ",",
+            "sLengthMenu": "แสดง _MENU_ แถว",
+            "sLoadingRecords": "กำลังโหลดข้อมูล...",
+            "sProcessing": "กำลังดำเนินการ...",
+            "sSearch": "ค้นหา: ",
+            "sZeroRecords": "ไม่พบข้อมูล",
+            "oPaginate": 
+            {
+            "sFirst": "หน้าแรก",
+            "sPrevious": "ก่อนหน้า",
+            "sNext": "ถัดไป",
+            "sLast": "หน้าสุดท้าย"
+            },
+            "oAria": 
+            {
+            "sSortAscending": ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
+            "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
+            }
+        }
+    });
     function checkpname()
     {
         var pname = document.getElementById('pname').value; // Get Value By id = fname in Table

@@ -16,14 +16,14 @@ session_start();
     if($result) {
         if($result["M_Status"]==1) {
             $_SESSION["status"] = 'Administator (ผู้ดูแลระบบ)';
-            $_SESSION["id"] = $result["id"];
+            $_SESSION["id"] = $result["M_id"];
             $_SESSION["cart_item"] = '';
             header("location: ../../page/admin/dashbroad/Main.php");
 
         }
         else if($result["M_Status"]==2){
             $_SESSION["status"] = "Member";
-            $_SESSION["id"] = $result["id"];
+            $_SESSION["id"] = $result["M_id"];
             $_SESSION["Fname"] = $result["M_Fname"];
             $_SESSION["Lname"] = $result["M_Lname"];
             $_SESSION["cart_member"] = '';

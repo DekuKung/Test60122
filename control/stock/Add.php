@@ -63,7 +63,7 @@ $img = $_FILES["img"]["name"];
 //     }
 // }
 
-$sql = "INSERT INTO `stock_product`(`id`, `P_name`, `P_amount`, `P_price`, `P_add_date`, `P_image`) 
+$sql = "INSERT INTO `stock_product`(`id`, `name`, `amount`, `price`, `date_update`, `image`) 
                             VALUES (null, '".$pname."', '".$amount."', '".$price."', CURDATE(), '".$img."')";
 $query = $condb->query($sql);
 if($query)

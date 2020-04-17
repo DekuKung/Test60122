@@ -12,23 +12,34 @@ if(!$_SESSION["status"]){
     include '../../../control/connect/condb.php';
 
     $id =  $_SESSION["id"];
-    $sql = "SELECT * FROM `get_tb`";
-    $query = $condb->query($sql);
     $total_price = 0;
     $total_buy = 0;
     $total_tel = 0;
     $item_details = '';
+
+    $cid = "SELECT * FROM booking";
+    $q = $condb->query($cid);
+    $result = mysqli_fetch_array($q, MYSQLI_ASSOC);
+    // echo $result["id"];
+    if($result["id"] == 0){
+        $count = 1;
+        // echo $count;
+    }else{
+        $count = $result["id"]+1;
+        // echo $count;
+    }
+
     $order_details = '
     <div class="table-responsive" id="order_table">
      <table class="table table-bordered table-striped">
      <thead>
      <tr>
-      <th>รหัสสินค้า</th>
-       <th>สินค้า</th>
-       <th>จำนวน</th>
-       <th>ราคาต่อหน่วย</th>
-       <th>ราคารวม</th>
-    
+        <th>รหัสการจอง</th>
+        <th>รหัสสินค้า</th>
+        <th>สินค้า</th>
+        <th>จำนวน</th>
+        <th>ราคาต่อหน่วย</th>
+        <th>ราคารวม</th>
      </tr>
            </thead>
            <tbody>
@@ -40,11 +51,12 @@ if(!$_SESSION["status"]){
         
       $order_details .= '
       <tr>
+      <td>'. $count .'</td>
       <td>'. $item['id'] .'</td>
       <td>'. $item['name'] .'</td>
       <td>'.$item['quantity'].'</td>
       <td>'. $item['price'] .'</td>
-      <td>'. number_format($total_buy, 2) .'</td>
+      <td>'. number_format($item_price, 2) .'</td>
       </tr>
       ';
       $total_tel += $item["quantity"];
@@ -63,6 +75,11 @@ if(!$_SESSION["status"]){
      ';
     }
     $order_details .= '</table>';
+
+    $sql = "SELECT * FROM `get_tb`";
+    $query = $condb->query($sql);
+    $sql2 = "SELECT * FROM customer";
+    $query2 = $condb->query($sql2);
     ?>
     <!doctype html>
     <html lang="en">
@@ -89,33 +106,173 @@ if(!$_SESSION["status"]){
         <!-- JQuery -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <script src="../../../js/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <!-- DataTable -->
         <script src="../../../DataTables/datatables.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../../../js/main.js"></script> 
         <script src="../../../js/popper.js"></script>
         <script src="../../../js/bootstrap.min.js"></script>
+        
         <script>
 $(document).ready(function(){
-    $("#btn").click(function(){
-        var cn = $("#cname").val();
-        var add = $("#address").val();
-        var tel = $("#tel").val();;
-        var date = $("#date").val();
-        var type = $("#type").val();
-        $("p.cusname").text(cn);
+
+    $('#id2').on('change',function(){
+        var id = $('#id2').val();
+        $.ajax({
+            type:'POST',
+            url:'../../../control/booking/select.php',
+            dataType: "json",
+            data:{id:id},
+            success:function(data){
+                if(data.status == 'ok'){
+                    $('#cname2').val(data.result.C_name);
+                    $('#cadd2').val(data.result.C_add);
+                    $('#ctel2').val(data.result.C_tel);
+                }else{
+                    alert("User not found...");
+                } 
+            }
+        });
+    });
+
+    $("#btn1").on("click",function(){
+        var cn = $('#cname').val();
+        var add = $("#cadd").val();
+        var tel = $("#ctel").val();
+        var date = $("#getdate1").val();
+        var type = $("#gettype1").val();
+        if(cn == ''){
+            alert('กรุณากรอกข้อมูล');
+        }
+        else if(add == ''){
+            alert('กรุณากรอกข้อมูล');
+        }
+        else if(tel == ''){
+            alert('กรุณากรอกข้อมูล');
+        }
+        else if(date == ''){
+            alert('กรุณากรอกข้อมูล');
+        }
+        else if(type == ''){
+            alert('กรุณากรอกข้อมูล');
+        }
+        else{
+        $("p.name").text(cn);
         $("p.address").text(add);
         $("p.tel").text(tel);
         $("p.date").text(date);
         $("p.type").text(type);
-        $("#cusname").val(cn);
-        $("#caddress").val(add);
-        $("#ctel").val(tel);
-        $("#getdate").val(date);
-        $("#gettype").val(type);
-    });      
+        $('#name').val(cn);
+        $('#add').val(add);
+        $('#phone').val(tel);
+        $('#getdate').val(date);
+        $('#gettype').val(type);
+        $('#payModal').modal("show");
+        
+        }
+    });
+
+    $("#btn2").on("click",function(){
+        var id = $('#id2').val();
+        var cn = $('#cname2').val();
+        var add = $("#cadd2").val();
+        var tel = $("#ctel2").val();
+        var date = $("#getdate2").val();
+        var type = $("#gettype2").val();
+
+        if(id == ''){
+            alert('กรุณาเลือกรหัสลูกค้า');
+        }
+        else if(date == ''){
+            alert('กรุณากรอกข้อมูล');
+        }
+        else if (type == ''){
+            alert('กรุณากรอกข้อมูล');
+        }
+        else {
+        $("p.name").text(cn);
+        $("p.address").text(add);
+        $("p.tel").text(tel);
+        $("p.date").text(date);
+        $("p.type").text(type);
+        $('#id').val(id);
+        $('#name').val(cn);
+        $('#add').val(add);
+        $('#phone').val(tel);
+        $('#getdate').val(date);
+        $('#gettype').val(type);
+        $('#payModal').modal("show");
+        }
+    });
+
 });
-        </script>
+
+function checkname()
+{
+var name = document.getElementById('cname').value; // Get Value By id = fname in Table
+var numn = name.length;  // Length's fname To Check Length in Requirement in non-functional requirement
+document.getElementById('n').innerHTML = ""; //Clear Text Warning Error
+// Check First Name Thai
+if(!name.match(/^([ก-๏\s])+$/i))
+{
+document.getElementById('cname').value = ""; // Clear Input Text
+document.getElementById('n').style.color = "red"; // Warning Style
+document.getElementById("n").innerHTML = "กรอกได้เฉพาะตัวอักษรภาษาไทยเท่านั้น"; // Warning Text
+}
+else if(numn < 2){ // Check Length min
+document.getElementById('n').style.color = "red" // Warning Style
+document.getElementById('n').innerHTML = "กรุณากรอกข้อมูลมากกว่า 2 ตัวอักษร" // Warning Text
+document.getElementById('cname').innerHTML = "" // Clear Input Text
+
+}
+else if(numn > 25) // Check Length max
+{
+document.getElementById('n').style.color = "red" // Warning Style
+document.getElementById('n').innerHTML = "กรุณากรอกข้อมูลน้อยกว่า 25 ตัวอักษร" // Warning Text
+document.getElementById('cname').innerHTML = "" // Clear Input Text
+}
+}
+
+function checktel()
+{
+var tel = document.getElementById('ctel').value; // Get Value By id = lname in Table
+var numtel = tel.length;  // Length's lname To Check Length in Requirement in non-functional requirement
+document.getElementById('errortel').innerHTML = ""; //Clear Text Warning Error
+// Check Last Name Thai
+if(!tel.match(/^0[689]{1}[0-9]{8}$/i))
+{
+document.getElementById('ctel').value = ""; // Clear Input Text
+document.getElementById('errortel').style.color = "red"; // Warning Style
+document.getElementById("errortel").innerHTML = "กรอกได้เฉพาะตัวเลขเท่านั้น"; // Warning Text
+}
+else if(numtel > 10)
+{
+document.getElementById('errortel').style.color = "red" // Warning Style
+document.getElementById('errortel').innerHTML = "กรุณากรอกข้อมูลน้อยกว่า 10 ตัวอักษร" // Warning Text
+document.getElementById('ctel').innerHTML = "" // Clear Input Text
+}
+}
+
+function showA()
+{
+    document.getElementById('newcus').hidden = true;
+    document.getElementById('oldcus').hidden = false;
+}
+function showB()
+{
+    document.getElementById('newcus').hidden = false;
+    document.getElementById('oldcus').hidden = true;
+}
+
+function showdata()
+{
+    var id = document.getElementById('id').value;
+
+    
+}        </script>
     </body>
     
     </html>
