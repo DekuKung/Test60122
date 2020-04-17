@@ -11,7 +11,6 @@ if(!$_SESSION["status"]){
 }else{
 include '../../../control/connect/condb.php';
 $id =  $_SESSION["id"];
-echo $id;
 $sql = "SELECT * FROM member WHERE M_id = '".$id."' ";
 $query = $condb->query($sql);
 $result = mysqli_fetch_array($query,MYSQLI_ASSOC);
