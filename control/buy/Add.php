@@ -34,12 +34,14 @@ $qcheck = $condb->query($check);
 $result  = mysqli_fetch_array($qcheck,MYSQLI_ASSOC);
 $unit = $result["amount"];
 
-// echo " id :".$id;
-// echo " name :".$pname;
-// echo " quantity :".$quantity;
-// echo "price :".$price;
-// echo " total :".$total_price;
-// echo "total amount : ".$total_amount;
+// echo " id :".$id."<br>";
+// echo " name :".$pname."<br>";
+// echo " quantity :".$quantity."<br>";
+// echo "price :".$price."<br>";
+// echo "item price :".$item_price."<br>";
+// echo "total_price :".$total_price."<br>";
+// echo "total amount : ".$total_amount."<br>";
+// echo "<br>";
 
 if($quantity > $unit){
         $alert =  "ไม่สามารถทำรายการได้เนื่องจาก"." ".$result["name"]." ไม่พอจำหน่าย";
@@ -51,10 +53,13 @@ if($quantity > $unit){
         exit();
 }
 else{
-$sql2 = "INSERT INTO `buy_detail`(`id`, `P_id`, `amount`) VALUES ($count, '".$id."', '".$quantity."')";
+$sql2 = "INSERT INTO `buy_detail`(`B_id`, `P_id`, `B_amount`, `B_price`) 
+                          VALUES ('".$count."', '".$id."', '".$quantity."', '".$item_price."')";
 // echo $sql2;
 // echo "<br>";
 $query2 = $condb->query($sql2);
+$update = "UPDATE `stock_product` SET `amount`=(`amount` - '".$quantity."') WHERE `id` = '".$id."' ";
+$updatestock = $condb->query($update);
 if($query2){
     // unset($_SESSION["cart_item"]);
     // echo "<script>";
@@ -72,26 +77,17 @@ else{
     }
    }
  }
- $sql = "INSERT INTO `buy`(`id`, `M_id`, `total_amount`, `total_price`, `date`) VALUES ($count, '".$seller."', '".$total_amount."', '".$total_price."', CURDATE() )";
+ $sql = "INSERT INTO `buy`(`B_id`, `M_id`, `B_total_amount`, `B_total_price`, `B_date`) 
+        VALUES ('".$count."', '".$seller."', '".$total_amount."', '".$total_price."', CURDATE())";
 //  echo $sql;
+//  echo "<br>";
 $query = $condb->query($sql);
 if($query){
-    $update = "UPDATE `stock_product` SET `amount`=(`amount` - '".$quantity."') WHERE id = '".$id."' ";
-    $updatestock = $condb->query($update);
-    if($updatestock){
     unset($_SESSION["cart_item"]);
     echo "<script>";
     echo "alert('ทำรายการเสร็จสิ้น');";
     echo "window.location='../../page/member/Cart/Main.php';";
-    echo "</script>"; 
-    }
-    else{
-      unset($_SESSION["cart_item"]);
-      echo "<script>";
-      echo "alert('ไม่สามารถทำรายการได้');";
-      echo "window.location='../../page/member/Cart/Main.php';";
-      echo "</script>";
-  }      
+    echo "</script>";     
     }
 else{
     unset($_SESSION["cart_item"]);

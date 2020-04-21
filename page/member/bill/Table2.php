@@ -19,6 +19,7 @@
                                 <th>วันที่มีการส่ง/รับสินค้า</th>
                                 <th>ประเภทการจัดส่ง</th>
                                 <th>สถานะการจัดส่งและรับเงิน</th>
+                                <th>รายละเอียด</th>
           					</tr>
                 		</thead>
                 	<tbody>
@@ -32,7 +33,31 @@
                         <td><?php echo $result['get_date']; ?></td>
                         <td><?php echo $result['get_name']; ?></td>
                         <td><?php echo $result['bill_name']; ?></td>
+                        <td align="center"><a href="#" data-target="#bodetailModal<?php echo $result['id']; ?>" class="btn btn btn-warning" data-toggle="modal" >รายละเอียด</a></td>
                     </tr>
+                    <div id="bodetailModal<?php echo $result['id']; ?>" name="bodetail" class="modal w-100 fade " >
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form method="POST">
+					<div class="modal-header">
+						<h4 class="modal-title">รายละเอียดประวัติการซื้อขาย</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body" id="detail_body">
+                        <p>สินค้า  ----------  จำนวน</p>
+                        <?php 	$detail = "SELECT DISTINCT * FROM booking_detail AS A
+                                        INNER JOIN stock_product AS B
+                                        ON A.P_id = B.id WHERE A.id = '".$result["id"]."'";
+                                $qdetail = $condb->query($detail);
+                                while ($rowdetail = mysqli_fetch_array($qdetail)){ 
+                                ?>     
+                                <p><?php echo $rowdetail["name"] ?> ---------- <?php echo $rowdetail["Bo_amount"] ?> แก้ว</p></tr>
+                                <?php } ?>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
                         <?php }?>
 			</tbody>
 			</table>

@@ -76,10 +76,13 @@ if($quantity > $unit){
     exit();
   }
   else{
-        $sql2 = "INSERT INTO `booking_detail`(`id`, `P_id`, `amount`) VALUES ($count, '".$id."', '".$quantity."')";
+        $sql2 = "INSERT INTO `booking_detail`(`Bo_id`, `P_id`, `Bo_amount`, `Bo_price`) 
+        VALUES ('".$count."', '".$id."', '".$quantity."', '".$item_price."')";
         // echo $sql2;
         // echo "<br>";
      $query2 = $condb->query($sql2);
+     $update = "UPDATE `stock_product` SET `amount`=(`amount` - '".$quantity."') WHERE id = '".$id."' ";
+     $updatestock = $condb->query($update);
      if($query2){
         //  unset($_SESSION["cart_item"]);
         //  echo "<script>";
@@ -97,8 +100,8 @@ if($quantity > $unit){
             }
           }
         }
-$sql = "INSERT INTO `booking`(`id`, `M_id`, `total_amount`, `total_price`, `date`, `C_id`, `get_id`, `bill_id`, `get_date`) 
-                   VALUES ('".$count."','".$seller."', '".$total_amount."', '".$total_price."', CURDATE(), '".$cid."', '".$ctype."', 1, '".$cdate."')";
+$sql = "INSERT INTO `booking`(`Bo_id`, `M_id`, `total_amount`, `total_price`, `date`, `C_id`, `get_id`, `bill_id`, `get_date`) 
+                      VALUES ('".$count."', '".$seller."', '".$total_amount."', '".$total_price."', CURDATE(), '".$cid."', '".$ctype."', 1, '".$cda."')";
 //  echo $sql;
 $query = $condb->query($sql);
 if($query){
@@ -165,10 +168,13 @@ if($quantity > $unit){
     exit();
   }
   else{
-      $sql2 = "INSERT INTO `booking_detail`(`id`, `P_id`, `amount`) VALUES ($count, '".$id."', '".$quantity."')";
+      $sql2 = "INSERT INTO `booking_detail`(`Bo_id`, `P_id`, `Bo_amount`, `Bo_price`) 
+                                    VALUES ('".$count."', '".$id."', '".$quantity."', '".$item_price."')";
       // echo $sql2;
       // echo "<br>";
       $query2 = $condb->query($sql2);
+      $update = "UPDATE `stock_product` SET `amount`=(`amount` - '".$quantity."') WHERE id = '".$id."' ";
+      $updatestock = $condb->query($update);
       if($query2){
        unset($_SESSION["cart_item"]);
        echo "<script>";
@@ -186,8 +192,8 @@ if($quantity > $unit){
             }
           }
         }
-$sql = "INSERT INTO `booking`(`id`, `M_id`, `total_amount`, `total_price`, `date`, `C_id`, `get_id`, `bill_id`, `get_date`) 
-                   VALUES ('".$count."','".$seller."', '".$total_amount."', '".$total_price."', CURDATE(), '".$cid."', '".$ctype."', 1, '".$cdate."')";
+$sql = "INSERT INTO `booking`(`Bo_id`, `M_id`, `total_amount`, `total_price`, `date`, `C_id`, `get_id`, `bill_id`, `get_date`) 
+                      VALUES ('".$count."', '".$seller."', '".$total_amount."', '".$total_price."', CURDATE(), '".$cid."', '".$ctype."', 1, '".$cdate."')";
 //  echo $sql;
 $query = $condb->query($sql);
 if($query){

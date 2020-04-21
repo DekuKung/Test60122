@@ -31,7 +31,7 @@
 			<div class="modal-content">
 				<form method="POST">
 					<div class="modal-header">
-						<h4 class="modal-title">รายละเอียดประวัติการซื้อขาย</h4>
+						<h4 class="modal-title">รายละเอียดประวัติการจองสินค้า</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body" id="detail_body">
