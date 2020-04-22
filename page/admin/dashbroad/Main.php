@@ -11,9 +11,10 @@ if(!$_SESSION["status"]){
 }else{
 include '../../../control/connect/condb.php';
 $id = $_SESSION["id"];
-$sql = "SELECT DISTINCT COUNT(B.id) AS totalbuy, A.M_id, A.M_Fname, A.M_Lname, SUM(B.total_amount) AS total_amount, SUM(B.total_price) AS total_price, B.date FROM member AS A
-INNER JOIN buy AS B 
-ON A.M_id = B.M_id";
+$sql = "SELECT DISTINCT COUNT(B.B_id) AS totalbuy, A.M_id, A.M_Fname, A.M_Lname, SUM(B.B_total_amount) AS total_amount, SUM(B.B_total_price) AS total_price, B.B_date, B.B_id 
+        FROM member AS A 
+        INNER JOIN buy AS B 
+        ON A.M_id = B.M_id";
 $query = $condb->query($sql);
 $sqlstock = "SELECT * FROM stock_product";
 $qchecks = $condb->query($sqlstock);
@@ -34,7 +35,7 @@ while ($rows = mysqli_fetch_array($qchecks,MYSQLI_ASSOC)){
 $sqltotalcus = "SELECT COUNT(A.C_id) AS Totalcus FROM customer AS A";
 $totalcus = $condb->query($sqltotalcus);
 //totalbooking
-$sqltotalbo = "SELECT COUNT(A.id) AS Totalbooking FROM booking AS A";
+$sqltotalbo = "SELECT COUNT(A.Bo_id) AS Totalbooking FROM booking AS A";
 $totalbo = $condb->query($sqltotalbo);
 //totalmember
 $sqltotalm = "SELECT COUNT(A.M_id) AS Total FROM member AS A WHERE A.M_Status = 2";

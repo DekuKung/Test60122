@@ -17,16 +17,16 @@
         </div> -->
 	  		<h1><div class="logo"><?php echo $_SESSION["Fname"]." ".$_SESSION["Lname"]; ?></div></h1>
         <ul class="list-unstyled components mb-5">
-        <li class="active">
+        <li>
             <a href="../customer/Main.php"><span class="fa fa-user-circle mr-3"></span> ทะเบียนลูกค้าที่สั่งจอง</a>
         </li>
-        <li class="active">
+        <li>
             <a href="../Cart/Main.php"><span class="fa fa-shopping-cart mr-3"></span> ตะกร้าสินค้า</a>
         </li>
-        <li class="active">
+        <li>
             <a href="../bill/Main.php"><span class="fa fa-money mr-3"></span> การแจ้งชำระเงิน</a>
         </li>
-        <li class="active">
+        <li>
             <a href="../stock/Main.php"><span class="fa fa-archive mr-3"></span> การนำเข้าสินค้า</a>
         </li>
           <!-- <li>

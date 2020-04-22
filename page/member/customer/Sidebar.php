@@ -17,7 +17,7 @@
         </div> -->
 	  		<h1><div class="logo"><?php echo $_SESSION["Fname"]." ".$_SESSION["Lname"]; ?></div></h1>
         <ul class="list-unstyled components mb-5">
-        <li class="active">
+        <li>
             <a href="../profile/Main.php"><span class="fa fa-home mr-3"></span> กลับ</a>
         </li>
           <!-- <li>

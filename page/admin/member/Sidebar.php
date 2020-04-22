@@ -17,11 +17,8 @@
         </div> -->
 	  		<h1><div class="logo"><?php echo $_SESSION["status"]; ?></div></h1>
         <ul class="list-unstyled components mb-5">
-        <li class="active">
+        <li>
             <a href="../dashbroad/Main.php"><span class="fa fa-home mr-3"></span> หน้าหลัก</a>
-          </li>
-          <li class="active">
-            <a href="../customer/Main.php"><span class="fa fa-user-circle mr-3"></span> จัดการลูกค้าสมาชิก</a>
           </li>
           <!-- <li>
             <a href="#"><span class="fa fa-times mr-3"></span> ออกจากระบบ</a>

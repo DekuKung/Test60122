@@ -21,6 +21,9 @@
               <a href="../member/Main.php"><span class="fa fa-user-circle mr-3"></span> จัดการสมาชิก</a>
           </li>
           <li>
+            <a href="../customer/Main.php"><span class="fa fa-user-circle mr-3"></span> จัดการทะเบียนลูกค้า</a>
+          </li>
+          <li>
               <a href="../buy/Main.php"><span class="fa fa-book mr-3"></span> ยอดการซื้อสินค้าหน้าร้าน</a>
           </li>
           <li>
