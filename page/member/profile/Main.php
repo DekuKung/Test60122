@@ -38,13 +38,7 @@ $querycheck = $condb->query($sqlcheck);
 while ($bookdate = mysqli_fetch_array($querycheck, MYSQLI_ASSOC)){
     // echo $bookdate["date"];
     // echo $datech["checkdate"];
- if($bookdate["date"] < $datech["checkdate"] ){
-    // echo "Too Late";
-    $massage = "การจองของ คุณ ".$bookdate["C_name"]." ใกล้ถึงเวลาการส่งมอบแล้ว";
-    echo "<script>";
-    echo "alert('$massage');";
-    echo "</script>";
- } else if ($bookdate["date"] == $datech["checkdate"]){
+ if ($bookdate["get_date"] == $datech["checkdate"]){
     $massage = "การจองของ คุณ ".$bookdate["C_name"]." ถึงเวลาการส่งมอบแล้ว";
     echo "<script>";
     echo "alert('$massage');";

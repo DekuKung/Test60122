@@ -2,7 +2,7 @@
 include '../connect/condb.php';
 
 $id = $_POST["id"];
-$fname = $_POST["name"];
+$name = $_POST["name"];
 $add = $_POST["add"];
 $tel = $_POST["tel"];
 
@@ -12,7 +12,7 @@ $tel = $_POST["tel"];
 // echo $add;
 // echo $tel;
 
-$sql = "UPDATE `customer` SET `C_name`= '".$name."', `C_add`='".$add."', `C_tel`='".$tel."' WHERE id = '".$id."' ";
+$sql = "UPDATE `customer` SET `C_name`= '".$name."', `C_add`='".$add."', `C_tel`='".$tel."' WHERE C_id = '".$id."' ";
 // echo $sql;
 $query = $condb->query($sql);
 if($query)

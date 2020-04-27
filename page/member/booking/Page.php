@@ -45,12 +45,11 @@
             <div class="form-group md-3" id="oldcus" hidden="true">
             <h4 class="form-title">ลูกค้าเก่า</h4>
             <label>รหัสลูกค้าที่เป็นสมาชิก</label>
-                    <select class="form-control" name="id2" id="id2" required oninvalid="this.setCustomValidity('กรุณาเลือก')">
-                    
+                    <select class="form-control" name="oldid" id="oldid" required oninvalid="this.setCustomValidity('กรุณาเลือก')">
 						<option value="" required><-- กรุณาเลือกลูกค้าที่เป็นสมาชิก --></option>
                     <?php while($row = mysqli_fetch_array($query2,MYSQLI_ASSOC)) { ?>
                         
-                        <option value="<?php echo $row["id"];?>"><?php echo $row["id"]." - ".$row["C_name"];?></option>
+                        <option value="<?php echo $row["C_id"];?>"><?php echo $row["C_id"]." - ".$row["C_name"];?></option>
                         <?php } ?>
                     </select>
                     <br>
@@ -114,7 +113,7 @@
         <input type="text" value="" id="name" name="name">
         <input type="text" value="" id="add" name="add">
         <input type="text" value="" id="phone" name="phone">
-        <input type="date" value="" id="getdate" name="getdate">
+        <input type="text" value="" id="getdate" name="getdate">
         <input type="text" value="" id="gettype" name="gettype">
         <?php echo $order_details; ?>
       </div>

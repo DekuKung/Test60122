@@ -20,7 +20,7 @@
                 	<tbody>
 						<?php while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) { ?>
         			<tr>
-					<td><?php echo $row["id"]; ?></td>
+					<td><?php echo $row["Bo_id"]; ?></td>
                         <td><?php echo $row["C_name"]; ?></td>
 						<td><?php echo $row['total_amount']." แก้ว";?></td>
             			<td><?php echo $row['total_price']." บาท"; ?></td>
@@ -28,10 +28,10 @@
                         <td><?php echo $row['get_date']; ?></td>
                         <td><?php echo $row['get_name']; ?></td>
                         <td><?php echo $row['bill_name']; ?></td>
-                        <td align="center"><a href="#" data-target="#dataModal<?php echo $row['id']; ?>" class="btn btn btn-warning" data-toggle="modal" >รายละเอียด</a></td>
+                        <td align="center"><a href="#" data-target="#dataModal<?php echo $row['Bo_id']; ?>" class="btn btn btn-warning" data-toggle="modal" >รายละเอียด</a></td>
                     </tr>
 
-                    <div id="dataModal<?php echo $row['id']; ?>" name="detail" class="modal w-100 fade " >
+                    <div id="dataModal<?php echo $row['Bo_id']; ?>" name="detail" class="modal w-100 fade " >
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form method="POST">
@@ -41,15 +41,13 @@
 					</div>
 					<div class="modal-body" id="detail_body">
                         <p>สินค้า  ----------  จำนวน</p>
-                        <?php 	$detail = "SELECT DISTINCT A.id, A.M_id, A.total_amount, B.amount, A.total_price, C.name FROM booking AS A 
-                                        INNER JOIN booking_detail AS B
-                                        ON A.id = B.id
-                                        INNER JOIN stock_product AS C
-                                        ON B.P_id = C.id WHERE A.id = '".$row["id"]."'";
+                        <?php 	$detail = "SELECT * FROM booking_detail AS A 
+                                            INNER JOIN stock_product AS C
+                                            ON A.P_id = C.id WHERE A.Bo_id = '".$row["Bo_id"]."'";
                                 $detailq = $condb->query($detail);
                                 while ($redetail = mysqli_fetch_array($detailq)){ 
                                 ?>     
-                                <p><?php echo $redetail["name"] ?> ---------- <?php echo $redetail["amount"] ?> แก้ว</p></tr>
+                                <p><?php echo $redetail["name"] ?> ---------- <?php echo $redetail["Bo_amount"] ?> แก้ว</p></tr>
                                 <?php } ?>
 					</div>
 				</form>

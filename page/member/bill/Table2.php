@@ -25,7 +25,7 @@
                 	<tbody>
 						<?php while($result = mysqli_fetch_array($query2,MYSQLI_ASSOC)) { ?>
         			<tr>
-                        <td id="bid" class="boid"><?php echo $result["id"]; ?></td>
+                        <td id="bid" class="boid"><?php echo $result["Bo_id"]; ?></td>
                         <td><?php echo $result["C_name"]; ?></td>
 						<td><?php echo $result['total_amount']." แก้ว";?></td>
             			<td><?php echo $result['total_price']." บาท"; ?></td>
@@ -33,9 +33,9 @@
                         <td><?php echo $result['get_date']; ?></td>
                         <td><?php echo $result['get_name']; ?></td>
                         <td><?php echo $result['bill_name']; ?></td>
-                        <td align="center"><a href="#" data-target="#bodetailModal<?php echo $result['id']; ?>" class="btn btn btn-warning" data-toggle="modal" >รายละเอียด</a></td>
+                        <td align="center"><a href="#" data-target="#bodetailModal<?php echo $result['Bo_id']; ?>" class="btn btn btn-warning" data-toggle="modal" >รายละเอียด</a></td>
                     </tr>
-                    <div id="bodetailModal<?php echo $result['id']; ?>" name="bodetail" class="modal w-100 fade " >
+                    <div id="bodetailModal<?php echo $result['Bo_id']; ?>" name="bodetail" class="modal w-100 fade " >
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form method="POST">
@@ -47,7 +47,7 @@
                         <p>สินค้า  ----------  จำนวน</p>
                         <?php 	$detail = "SELECT DISTINCT * FROM booking_detail AS A
                                         INNER JOIN stock_product AS B
-                                        ON A.P_id = B.id WHERE A.id = '".$result["id"]."'";
+                                        ON A.P_id = B.id WHERE A.id = '".$result["Bo_id"]."'";
                                 $qdetail = $condb->query($detail);
                                 while ($rowdetail = mysqli_fetch_array($qdetail)){ 
                                 ?>     

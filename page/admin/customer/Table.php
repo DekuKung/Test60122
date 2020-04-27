@@ -44,7 +44,7 @@
 					</div>
 						<div class="form-group">
 							<label>ชื่อ</label>
-							<input type="text" value="<?php echo $result['C_name'];?>" name="name" id="name" class="form-control" onchange="checkfname();" required>
+							<input type="text" value="<?php echo $result['C_name'];?>" name="name" id="cusname" class="form-control" onchange="checkname();" required><p id="n"></p>
 						</div>
 						<div class="form-group">
 							<label>ที่อยู่</label>
@@ -52,7 +52,7 @@
 						</div>
 						<div class="form-group">
 							<label>เบอร์โทร</label>
-							<input type="text" value="<?php echo $result['C_tel'];?>" name="tel" id="tel" class="form-control" onchange="checktel();" required>
+							<input type="text" value="<?php echo $result['C_tel'];?>" name="tel" id="custel" class="form-control" onchange="checktel();" maxlength="10" required><p id="errortel"></p>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -100,7 +100,7 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<label>ชื่อ</label>
-							<input type="text" value="" name="name" id="name" class="form-control" onchange="checkname();" maxlength="25" minlength="2" required><p id="n"></p>
+							<input type="text" value="" name="cusname" id="cusname" class="form-control" onchange="checkname();" maxlength="25" minlength="2" required><p id="n"></p>
 						</div>
 						<div class="form-group">
 							<label>ที่อยู่</label>
@@ -108,7 +108,7 @@
 						</div>
 						<div class="form-group">
 							<label>เบอร์โทร</label>
-							<input type="text" value="" name="tel" id="tel" class="form-control" onchange="checktel();" maxlength="10" required><p id="errortel"></p>
+							<input type="text" value="" name="custel" id="custel" class="form-control" onblur="checktel();" maxlength="10" required><p id="errortel"></p>
 						</div>
 					</div>
 					<div class="modal-footer">

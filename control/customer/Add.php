@@ -1,15 +1,15 @@
 <?php
 include '../connect/condb.php';
 
-$name = $_POST["name"];
+$name = $_POST["cusname"];
 $add = $_POST["add"];
-$tel = $_POST["tel"];
+$tel = $_POST["custel"];
 
 // echo $name;
 // echo $add;
 // echo $tel;
 
-$sql = "INSERT INTO `customer`(`id`, `C_name`, `C_add`, `C_tel`) 
+$sql = "INSERT INTO `customer`(`C_id`, `C_name`, `C_add`, `C_tel`) 
                        VALUES (null, '".$name."', '".$add."', '".$tel."')";
 // echo $sql;
 $query = $condb->query($sql);

@@ -12,19 +12,19 @@ $price = $_POST["price"];
 if($price == 0)
 {
     $sql = "UPDATE `stock_product` 
-    SET `amount`= (`amount` + '".$amount."'), `date_update`= CURDATE() WHERE id = '".$id."' ";
+    SET `amount`= '".$amount."', `date_update`= CURDATE() WHERE id = '".$id."' ";
 }
 else
 {
     $sql = "UPDATE `stock_product` 
-    SET `amount`= (`amount` + '".$amount."'), `price`='".$price."' , `date_update`= CURDATE() WHERE id = '".$id."' ";
+    SET `amount`= '".$amount."', `price`='".$price."' , `date_update`= CURDATE() WHERE id = '".$id."' ";
 }
 // echo $sql;
 $query = $condb->query($sql);
 if($query)
 {
     echo "<script>";
-    echo "alert('นำเข้าสินค้าเสร็จสิ้น');";
+    echo "alert('แก้ไขข้อมูลสินค้าเสร็จสิ้น');";
     echo "window.location='../../page/admin/stock/Main.php';";
     echo "</script>";
 }

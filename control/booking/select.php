@@ -5,7 +5,7 @@ if(!empty($_POST['id'])){
 	include '../connect/condb.php';
     
 	//get user data from the database
-	$sql = "SELECT * FROM `customer` WHERE id = {$_POST['id']}";
+	$sql = "SELECT * FROM `customer` WHERE C_id = {$_POST['id']}";
     $query = $condb->query($sql);
     if($query->num_rows > 0){
         $userData = $query->fetch_assoc();

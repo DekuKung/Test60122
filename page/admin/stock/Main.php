@@ -52,7 +52,7 @@ img
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="../../../js/main.js"></script> 
     <script src="../../../js/popper.js"></script>
-    <script src="../../../js/bootstrap.min.js"></script>\
+    <script src="../../../js/bootstrap.min.js"></script>
     <script>
         $('#Ptable').dataTable({
             "oLanguage": {

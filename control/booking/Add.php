@@ -6,16 +6,17 @@ $total_price = 0;
 $total_buy = 0;
 $total_amount = 0;
 
-$bid = "SELECT * FROM booking";
-$q = $condb->query($bid);
-$result = mysqli_fetch_array($q, MYSQLI_ASSOC);
-// echo $result["id"];
-if($result["id"] == 0){
-  $count = 1;
-  // echo $count;
+$boid = "SELECT * FROM booking";
+$q = $condb->query($boid);
+while ($result = mysqli_fetch_array($q, MYSQLI_ASSOC)){
+// echo $result["Bo_id"];
+if($result["Bo_id"] == 0){
+    $count = 1;
+    // echo $count;
 }else{
-  $count = $result["id"]+1;
-  // echo $count;
+    $count = $result["Bo_id"]+1;
+    // echo $count;
+}
 }
  if($_POST["id"] == ''){ // New Customer
   //  echo "ไม่มี";
@@ -26,16 +27,16 @@ if($result["id"] == 0){
   $ctype = $_POST["gettype"];
   $seller = $_SESSION["id"];
 
-  echo $cname."<br>";
-  echo $cadd."<br>";
-  echo $ctel."<br>";
-  echo $cdate."<br>";
-  echo $ctype."<br>";
+  // echo $cname."<br>";
+  // echo $cadd."<br>";
+  // echo $ctel."<br>";
+  // echo $cdate."<br>";
+  // echo $ctype."<br>";
 
   $newcus = "INSERT INTO `customer`(`id`, `C_name`, `C_add`, `C_tel`) 
   VALUES (null, '".$cname."', '".$cadd."', '".$ctel."')";
   // echo $newcus;
-  // $querynew = $condb->query($newcus);
+  $querynew = $condb->query($newcus);
 
   $sqlcus = "SELECT * FROM customer WHERE C_name = '".$cname."'";
   echo $sqlcus;
@@ -80,9 +81,7 @@ if($quantity > $unit){
         VALUES ('".$count."', '".$id."', '".$quantity."', '".$item_price."')";
         // echo $sql2;
         // echo "<br>";
-     $query2 = $condb->query($sql2);
-     $update = "UPDATE `stock_product` SET `amount`=(`amount` - '".$quantity."') WHERE id = '".$id."' ";
-     $updatestock = $condb->query($update);
+     $query2 = $condb->query($sql2);;
      if($query2){
         //  unset($_SESSION["cart_item"]);
         //  echo "<script>";
@@ -133,6 +132,7 @@ $quantity = $item["quantity"];
 $price = $item["price"];
 $total_amount += $item["quantity"];
 $total_price += ($item["price"] * $item["quantity"]);
+
 $cid = $_POST["id"];
 $cname = $_POST["name"];
 $cadd = $_POST["add"];
@@ -146,12 +146,12 @@ $qcheck = $condb->query($check);
 $result  = mysqli_fetch_array($qcheck,MYSQLI_ASSOC);
 $unit = $result["amount"];
 
-// echo " id :".$id."<br>";
-// echo " name :".$pname."<br>";
-// echo " quantity :".$quantity."<br>";
-// echo "price :".$price."<br>";
-// echo " total :".$total_price."<br>";
-// echo "total amount : ".$total_amount."<br>";
+echo " id :".$id."<br>";
+echo " name :".$pname."<br>";
+echo " quantity :".$quantity."<br>";
+echo "price :".$price."<br>";
+echo " total :".$total_price."<br>";
+echo "total amount : ".$total_amount."<br>";
 // echo $cname."<br>";
 // echo $cadd."<br>";
 // echo $ctel."<br>";
@@ -170,17 +170,15 @@ if($quantity > $unit){
   else{
       $sql2 = "INSERT INTO `booking_detail`(`Bo_id`, `P_id`, `Bo_amount`, `Bo_price`) 
                                     VALUES ('".$count."', '".$id."', '".$quantity."', '".$item_price."')";
-      // echo $sql2;
-      // echo "<br>";
+      echo $sql2;
+      echo "<br>";
       $query2 = $condb->query($sql2);
-      $update = "UPDATE `stock_product` SET `amount`=(`amount` - '".$quantity."') WHERE id = '".$id."' ";
-      $updatestock = $condb->query($update);
       if($query2){
-       unset($_SESSION["cart_item"]);
-       echo "<script>";
-       echo "alert('ไม่สามารถทำรายการได้');";
-       echo "window.location='../../page/member/Cart/Main.php';";
-       echo "</script>"; 
+      //  unset($_SESSION["cart_item"]);
+      //  echo "<script>";
+      //  echo "alert('ไม่สามารถทำรายการได้');";
+      //  echo "window.location='../../page/member/Cart/Main.php';";
+      //  echo "</script>"; 
       }
       else{
            unset($_SESSION["cart_item"]);

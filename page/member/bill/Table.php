@@ -25,7 +25,7 @@
                 	<tbody>
 						<?php while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) { ?>
         			<tr>
-                        <td id="bid" class="boid"><?php echo $row["id"]; ?></td>
+                        <td id="bid" class="boid"><?php echo $row["Bo_id"]; ?></td>
                         <td><?php echo $row["C_name"]; ?></td>
 						<td><?php echo $row['total_amount']." แก้ว";?></td>
             			<td><?php echo $row['total_price']." บาท"; ?></td>
@@ -34,12 +34,12 @@
                         <td><?php echo $row['get_name']; ?></td>
                         <td><?php echo $row['bill_name']; ?></td>
                         <td align="center">
-							<a href="#" data-target="#billModal<?php  echo $row["id"]; ?>" class="btn btn-sm btn-success" data-toggle="modal">แจ้งชำระเงิน</a>
-              <a href="#" data-target="#cancelModal<?php  echo $row["id"]; ?>" class="btn btn-sm btn-danger" data-toggle="modal">ยกเลิก</a>
+							<a href="#" data-target="#billModal<?php  echo $row["Bo_id"]; ?>" class="btn btn-sm btn-success" data-toggle="modal">แจ้งชำระเงิน</a>
+              <a href="#" data-target="#cancelModal<?php  echo $row["Bo_id"]; ?>" class="btn btn-sm btn-danger" data-toggle="modal">ยกเลิก</a>
                         </td>
                     </tr>
 										    <!-- Modal -->
-<div class="modal fade" id="billModal<?php  echo $row["id"]; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade" id="billModal<?php  echo $row["Bo_id"]; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 <form  method="POST" action="../../../control/booking/bill.php">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -50,7 +50,7 @@
         </button>
       </div>
       <div class="modal-body">
-	  	<p>รหัส : <?php  echo $row["id"]; ?></p>
+	  	<p>รหัส : <?php  echo $row["Bo_id"]; ?></p>
         <p>ชื่อลูกค้า : <?php echo $row["C_name"]; ?></p>
         <p>ที่อยู่ลูกค้า : <?php echo $row["C_add"]; ?></p>
         <p>เบอร์โทรลูกค้า : <?php echo $row["C_tel"]; ?></p>
@@ -67,23 +67,23 @@
 </form>
 
 <form  method="POST" action="../../../control/booking/Add.php">
-<div class="modal fade" id="cancelModal<?php  echo $row["id"]; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade" id="cancelModal<?php  echo $row["Bo_id"]; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">รายการจอง</h5>
+        <h5 class="modal-title">รายการจองสินค้าที่ต้องการยกเลิก</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-	  	<p>รหัส : <?php  echo $row["id"]; ?></p>
+	  	<p>รหัส : <?php  echo $row["Bo_id"]; ?></p>
         <p>ชื่อลูกค้า : <?php echo $row["C_name"]; ?></p>
         <p>ที่อยู่ลูกค้า : <?php echo $row["C_add"]; ?></p>
         <p>เบอร์โทรลูกค้า : <?php echo $row["C_tel"]; ?></p>
         <p>วันที่รับ-ส่ง : <?php echo $row['get_date']; ?></p>
         <p>ประเภทการส่ง : <?php echo $row['get_name']; ?></p>
-        <input type="text" value="<?php  echo $row["id"]; ?>" id="id" name="id">
+        <input type="hidden" value="<?php  echo $row["id"]; ?>" id="id" name="id">
         <input type="hidden" value="" id="name" name="name">
         <input type="hidden" value="" id="add" name="add">
         <input type="hidden" value="" id="phone" name="phone">
@@ -91,7 +91,7 @@
         <input type="hidden" value="" id="gettype" name="gettype">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-success">ยืนยันการส่งมอบ</button>
+        <button type="submit" class="btn btn-danger">ยืนยันการยกเลิก</button>
       </div>
     </div>
   </div>

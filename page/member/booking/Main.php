@@ -1,6 +1,6 @@
 <?php
 session_start();
-//error_reporting(0);
+error_reporting(0);
 if(!$_SESSION["status"]){
     if(!$_SESSION["id"]){
         echo "<script>";
@@ -17,17 +17,18 @@ if(!$_SESSION["status"]){
     $total_tel = 0;
     $item_details = '';
 
-    $cid = "SELECT * FROM booking";
-    $q = $condb->query($cid);
-    $result = mysqli_fetch_array($q, MYSQLI_ASSOC);
-    // echo $result["id"];
-    if($result["id"] == 0){
+    $boid = "SELECT * FROM booking";
+    $q = $condb->query($boid);
+    while ($result = mysqli_fetch_array($q, MYSQLI_ASSOC)){
+    // echo $result["Bo_id"];
+    if($result["Bo_id"] == 0){
         $count = 1;
         // echo $count;
     }else{
-        $count = $result["id"]+1;
+        $count = $result["Bo_id"]+1;
         // echo $count;
     }
+}
 
     $order_details = '
     <div class="table-responsive" id="order_table">
@@ -119,8 +120,8 @@ if(!$_SESSION["status"]){
         <script>
 $(document).ready(function(){
 
-    $('#id2').on('change',function(){
-        var id = $('#id2').val();
+    $('#oldid').on('change',function(){
+        var id = $('#oldid').val();
         $.ajax({
             type:'POST',
             url:'../../../control/booking/select.php',
@@ -176,7 +177,7 @@ $(document).ready(function(){
     });
 
     $("#btn2").on("click",function(){
-        var id = $('#id2').val();
+        var id = $('#oldid').val();
         var cn = $('#cname2').val();
         var add = $("#cadd2").val();
         var tel = $("#ctel2").val();
