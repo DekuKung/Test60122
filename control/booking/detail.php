@@ -1,11 +1,10 @@
 <?php
 if(!empty($_POST['id'])){
     $data = array();
-	
 	include '../connect/condb.php';
     $output = '';
 	//get user data from the database
-	$sql = "SELECT DISTINCT A.id, A.M_id, A.total_amount, B.amount, A.total_price, C.name FROM booking AS A 
+	$sql = "SELECT DISTINCT A.id, A.M_id, A.total_amount, B.amount, A.total_price, C.name FROM booking AS A
     INNER JOIN booking_detail AS B
     ON A.id = B.id
     INNER JOIN stock_product AS C

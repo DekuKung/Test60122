@@ -7,7 +7,7 @@ if(!$_SESSION["status"]){
         echo "alert('ท่านไม่มีสิทธิ์การเข้าใช้งาน');";
         echo "window.location='./index.php';";
         echo "</script>";
-    }        
+    }
 }else{
     include '../../../control/connect/condb.php';
 
@@ -17,18 +17,18 @@ if(!$_SESSION["status"]){
     $total_tel = 0;
     $item_details = '';
 
-    $boid = "SELECT * FROM booking";
+
+    $boid = "SELECT COUNT(*) AS num_rows FROM booking";
     $q = $condb->query($boid);
-    while ($result = mysqli_fetch_array($q, MYSQLI_ASSOC)){
-    // echo $result["Bo_id"];
-    if($result["Bo_id"] == 0){
+    $result = mysqli_fetch_array($q, MYSQLI_ASSOC);
+    // echo $result["num_rows"];
+    if($result["num_rows"] == 0){
         $count = 1;
         // echo $count;
-    }else{
-        $count = $result["Bo_id"]+1;
-        // echo $count;
     }
-}
+    else {
+        $count = $result["num_rows"] + 1;
+    }
 
     $order_details = '
     <div class="table-responsive" id="order_table">
@@ -49,7 +49,6 @@ if(!$_SESSION["status"]){
     foreach($_SESSION["cart_item"] as $item) {
         $item_price = $item["quantity"] * $item["price"];
         $total_buy += $item["price"];
-        
       $order_details .= '
       <tr>
       <td>'. $count .'</td>
@@ -62,9 +61,9 @@ if(!$_SESSION["status"]){
       ';
       $total_tel += $item["quantity"];
       $total_price += ($item["price"] * $item["quantity"]);
-    
+
         }
-    
+
      $item_details .= $item["name"] . ', ';
      $item_details = substr($item_details, 0, -2);
      $order_details .= '
@@ -101,7 +100,19 @@ if(!$_SESSION["status"]){
     <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
       <!-- Table Member -->
-      <?php include './Page.php'; ?>
+      <?php     $boid = "SELECT * FROM booking";
+    $qb = $condb->query($boid);
+    while ($result = mysqli_fetch_array($qb, MYSQLI_ASSOC)){
+    echo $result["Bo_id"];
+    if($result["Bo_id"] == ''){
+        $count = 1;
+        echo $count;
+    }else{
+        $count = $result["Bo_id"]+1;
+        echo $count;
+    }
+}
+ include './Page.php'; ?>
         <!-- END Page Content  -->
         </div>
         <!-- JQuery -->
@@ -113,10 +124,9 @@ if(!$_SESSION["status"]){
         <!-- DataTable -->
         <script src="../../../DataTables/datatables.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="../../../js/main.js"></script> 
+        <script src="../../../js/main.js"></script>
         <script src="../../../js/popper.js"></script>
         <script src="../../../js/bootstrap.min.js"></script>
-        
         <script>
 $(document).ready(function(){
 

@@ -7,25 +7,22 @@ if(!$_SESSION["status"]){
         echo "alert('ท่านไม่มีสิทธิ์การเข้าใช้งาน');";
         echo "window.location='./index.php';";
         echo "</script>";
-    }        
+    }
 }else{
 include '../../../control/connect/condb.php';
 $id = $_SESSION["id"];
-$sql = "SELECT DISTINCT COUNT(B.B_id) AS totalbuy, A.M_id, A.M_Fname, A.M_Lname, SUM(B.B_total_amount) AS total_amount, SUM(B.B_total_price) AS total_price, B.B_date, B.B_id 
-        FROM member AS A 
-        INNER JOIN buy AS B 
-        ON A.M_id = B.M_id";
+$sql = "SELECT A.B_id, B.M_id, B.M_Fname, B.M_Lname, A.B_total_amount, A.B_total_price, A.B_date FROM buy AS A INNER JOIN member AS B ON A.M_id = B.M_id";
 $query = $condb->query($sql);
 $sqlstock = "SELECT * FROM stock_product";
 $qchecks = $condb->query($sqlstock);
 while ($rows = mysqli_fetch_array($qchecks,MYSQLI_ASSOC)){
-    if($rows["amount"] == 0){
-        $alert = "ตอนนี้ ".$rows["name"]." หมดแล้ว ";
+    if($rows["P_amount"] == 0){
+        $alert = "ตอนนี้ ".$rows["P_name"]." หมดแล้ว ";
         echo "<script>";
         echo "alert('$alert');";
         echo "</script>";
-}else if($rows["amount"] < 10){
-        $alert = "ตอนนี้ ".$rows["name"]." เหลือแค่ ".$rows["amount"]." แก้ว กรุณาเติมสินค้า";
+}else if($rows["P_amount"] < 10){
+        $alert = "ตอนนี้ ".$rows["P_name"]." เหลือแค่ ".$rows["P_amount"]." แก้ว กรุณาเติมสินค้า";
         echo "<script>";
         echo "alert('$alert');";
         echo "</script>";
@@ -41,52 +38,68 @@ $totalbo = $condb->query($sqltotalbo);
 $sqltotalm = "SELECT COUNT(A.M_id) AS Total FROM member AS A WHERE A.M_Status = 2";
 $totalm = $condb->query($sqltotalm);
 //totalstock
-$sqltotalst = "SELECT SUM(A.amount) AS Totalstock FROM stock_product AS A";
+$sqltotalst = "SELECT SUM(A.P_amount) AS Totalstock FROM stock_product AS A";
 $totalst = $condb->query($sqltotalst);
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>หน้า Admin</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../../DataTables/datatables.css">
-    <link rel="stylesheet" href="../../../css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../DataTables/datatables.css">
+  <link rel="stylesheet" href="../../../css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>หน้าหลัก</title>
 </head>
-<style>
-    .fadeInDown {
-  -webkit-animation-name: fadeInDown;
-  animation-name: fadeInDown;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-</style>
 <body class="sb-nav-fixed">
 <?php include './Sidebar.php'; ?>
 <!-- Page Content  -->
     <div id="content" class="p-4 p-md-5 pt-5">
     <?php include './Card.php'; ?>
   <!-- Table Member -->
-    <?php include './pageStatus.php'; ?>
+  <?php include './Table.php'; ?>
     <!-- END Page Content  -->
     </div>
-    <!-- JQuery -->
-  <script src="../../../js/jquery.min.js"></script>
-  <script src="../../../DataTables/datatables.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-  <script src="../../../js/bootstrap.min.js"></script>
-  <script src="../../../js/popper.js"></script>
-  <script src="../../../js/main.js"></script>
-  <script>
-    //   $('#buytable').dataTable(); 
+      <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="../../../js/jquery.min.js"></script>
+    <!-- DataTable -->
+    <script src="../../../DataTables/datatables.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/popper.js"></script>
+    <script src="../../../js/bootstrap.min.js"></script>
+    <script>
+        $('#Btable').dataTable({
+            "oLanguage": {
+            "sEmptyTable": "ไม่มีข้อมูลในตาราง",
+            "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
+            "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 แถว",
+            "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกแถว)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ",",
+            "sLengthMenu": "แสดง _MENU_ แถว",
+            "sLoadingRecords": "กำลังโหลดข้อมูล...",
+            "sProcessing": "กำลังดำเนินการ...",
+            "sSearch": "ค้นหา: ",
+            "sZeroRecords": "ไม่พบข้อมูล",
+            "oPaginate":
+            {
+            "sFirst": "หน้าแรก",
+            "sPrevious": "ก่อนหน้า",
+            "sNext": "ถัดไป",
+            "sLast": "หน้าสุดท้าย"
+            },
+            "oAria":
+            {
+            "sSortAscending": ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
+            "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
+            }
+        }
+    });
   </script>
 </body>
 </html>

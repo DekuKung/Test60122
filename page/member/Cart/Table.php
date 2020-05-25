@@ -1,9 +1,9 @@
 <!-- <div id="content" class="p-4 p-md-5 pt-5"> -->
 <div class="col-md-6"  method="POST">
-<?php  
+<?php
 $product_array = $db_handle->runQuery("SELECT * FROM stock_product");
 if(!empty($product_array)) {
-	
+
 ?>
 
     	<div class="card-header"><i class="fa fa-table mr-1"></i>ตารางสินค้าหน้าร้าน</div>
@@ -22,9 +22,9 @@ if(!empty($product_array)) {
                 		</thead>
                 	<tbody>
 					<?php
-					foreach($product_array as $key => $value) { 	
+					foreach($product_array as $key => $value) {
 					?>
-					
+
         			<tr>
 						<form action="./Main.php?action=add&id=<?php echo $product_array[$key]["id"]; ?>" method="post">
 						<td><img class="" src="../../../pic/<?php echo $product_array[$key]["image"];?>"></td>
@@ -36,7 +36,7 @@ if(!empty($product_array)) {
 						<td><input type="number" name="quantity" value="1" class="form-control" size="2" min="1" pattern="[1234567890]" title="ตัวเลขเท่านั้น" required></td>
 						<td><input type="submit" value="เพิ่มลงตระกร้า" class="btn btn-sm btn-warning" /></td>
 					</form></tr>
-				<?php 
+				<?php
 					}
 				}
 				?>
@@ -46,4 +46,4 @@ if(!empty($product_array)) {
 		</div>
 		</div>
 	<!--End Delete Modal -->
-                        
+

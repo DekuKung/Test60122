@@ -6,18 +6,18 @@ $total_price = 0;
 $total_buy = 0;
 $total_amount = 0;
 
-$boid = "SELECT * FROM booking";
+$boid = "SELECT COUNT(*) AS num_rows FROM booking";
 $q = $condb->query($boid);
-while ($result = mysqli_fetch_array($q, MYSQLI_ASSOC)){
-// echo $result["Bo_id"];
-if($result["Bo_id"] == 0){
+$result = mysqli_fetch_array($q, MYSQLI_ASSOC);
+// echo $result["num_rows"];
+if($result["num_rows"] == 0){
     $count = 1;
     // echo $count;
-}else{
-    $count = $result["Bo_id"]+1;
-    // echo $count;
 }
+else {
+    $count = $result["num_rows"] + 1;
 }
+
  if($_POST["id"] == ''){ // New Customer
   //  echo "ไม่มี";
   $cname = $_POST["name"];
@@ -33,7 +33,7 @@ if($result["Bo_id"] == 0){
   // echo $cdate."<br>";
   // echo $ctype."<br>";
 
-  $newcus = "INSERT INTO `customer`(`id`, `C_name`, `C_add`, `C_tel`) 
+  $newcus = "INSERT INTO `customer`(`id`, `C_name`, `C_add`, `C_tel`)
   VALUES (null, '".$cname."', '".$cadd."', '".$ctel."')";
   // echo $newcus;
   $querynew = $condb->query($newcus);
@@ -87,20 +87,20 @@ if($quantity > $unit){
         //  echo "<script>";
         //  echo "alert('ไม่สามารถทำรายการได้');";
         //  echo "window.location='../../page/member/Cart/Main.php';";
-        //  echo "</script>"; 
+        //  echo "</script>";
       }
       else{
            unset($_SESSION["cart_item"]);
            echo "<script>";
            echo "alert('ไม่สามารถทำรายการได้');";
            echo "window.location='../../page/member/Cart/Main.php';";
-           echo "</script>"; 
-           } 
+           echo "</script>";
+           }
             }
           }
         }
-$sql = "INSERT INTO `booking`(`Bo_id`, `M_id`, `total_amount`, `total_price`, `date`, `C_id`, `get_id`, `bill_id`, `get_date`) 
-                      VALUES ('".$count."', '".$seller."', '".$total_amount."', '".$total_price."', CURDATE(), '".$cid."', '".$ctype."', 1, '".$cda."')";
+$sql = "INSERT INTO `booking`(`Bo_id`, `M_id`, `C_id`, `Bo_total_amount`, `total_price`, `Bo_date`, `Bo_getdate`, `get_id`, `bill_id`) 
+                      VALUES ('".$count."', '".$seller."', '".$cid."', '".$total_amount."', '".$total_price."', CURDATE(), '".$cda."', '".$ctype."', 1)";
 //  echo $sql;
 $query = $condb->query($sql);
 if($query){
@@ -108,7 +108,7 @@ unset($_SESSION["cart_item"]);
 echo "<script>";
 echo "alert('ทำรายการจองสินค้าและลงทะเบียนลูกค้าเสร็จสิ้น');";
 echo "window.location='../../page/member/Cart/Main.php';";
-echo "</script>"; 
+echo "</script>";
 }
 else{
 unset($_SESSION["cart_item"]);
@@ -119,7 +119,7 @@ echo "</script>";
 }
  }
 
- 
+
  else{ // Old Customer
   //  echo $_POST["id"];
   if(isset($_SESSION["cart_item"])) {
@@ -168,7 +168,7 @@ if($quantity > $unit){
     exit();
   }
   else{
-      $sql2 = "INSERT INTO `booking_detail`(`Bo_id`, `P_id`, `Bo_amount`, `Bo_price`) 
+      $sql2 = "INSERT INTO `booking_detail`(`Bo_id`, `P_id`, `Bo_amount`, `Bo_price`)
                                     VALUES ('".$count."', '".$id."', '".$quantity."', '".$item_price."')";
       echo $sql2;
       echo "<br>";
@@ -178,20 +178,20 @@ if($quantity > $unit){
       //  echo "<script>";
       //  echo "alert('ไม่สามารถทำรายการได้');";
       //  echo "window.location='../../page/member/Cart/Main.php';";
-      //  echo "</script>"; 
+      //  echo "</script>";
       }
       else{
            unset($_SESSION["cart_item"]);
            echo "<script>";
            echo "alert('ไม่สามารถทำรายการได้');";
            echo "window.location='../../page/member/Cart/Main.php';";
-           echo "</script>"; 
-          } 
+           echo "</script>";
+          }
             }
           }
         }
-$sql = "INSERT INTO `booking`(`Bo_id`, `M_id`, `total_amount`, `total_price`, `date`, `C_id`, `get_id`, `bill_id`, `get_date`) 
-                      VALUES ('".$count."', '".$seller."', '".$total_amount."', '".$total_price."', CURDATE(), '".$cid."', '".$ctype."', 1, '".$cdate."')";
+$sql = "INSERT INTO `booking`(`Bo_id`, `M_id`, `C_id`, `Bo_total_amount`, `total_price`, `Bo_date`, `Bo_getdate`, `get_id`, `bill_id`)
+VALUES ('".$count."', '".$seller."', '".$cid."', '".$total_amount."', '".$total_price."', CURDATE(), '".$cda."', '".$ctype."', 1)";
 //  echo $sql;
 $query = $condb->query($sql);
 if($query){
@@ -199,7 +199,7 @@ unset($_SESSION["cart_item"]);
 echo "<script>";
 echo "alert('ทำรายการจองสินค้าเสร็จสิ้น');";
 echo "window.location='../../page/member/Cart/Main.php';";
-echo "</script>"; 
+echo "</script>";
 }
 else{
 unset($_SESSION["cart_item"]);

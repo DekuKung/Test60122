@@ -3,7 +3,8 @@ session_start();
 include '../connect/condb.php';
 
 $id = $_POST["id"];
-$sql = "UPDATE `booking` SET `bill_id`= 2 WHERE Bo_id = '".$id."' ";
+$date = $_POST["date"];
+$sql = "UPDATE `booking` SET `bill_id`= 2, `Bo_getdate` = '".$date."' WHERE Bo_id = '".$id."' ";
 $sqlcheck = "SELECT * FROM booking_detail WHERE Bo_id = '".$id."' ";
 $querycheck = $condb->query($sqlcheck);
 while ($resultcheck = mysqli_fetch_array($querycheck, MYSQLI_ASSOC)){
@@ -30,13 +31,13 @@ if($query){
     echo "<script>";
     echo "alert('$mes');";
     echo "window.location='../../page/member/bill/Main.php';";
-    echo "</script>"; 
+    echo "</script>";
 }
 else {
     echo "<script>";
     echo "alert('ไม่สามารถทำรายการได้');";
     echo "window.location='../../page/member/bill/Main.php';";
-    echo "</script>"; 
+    echo "</script>";
 }
 
 ?>

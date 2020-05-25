@@ -7,7 +7,7 @@ if(!$_SESSION["status"]){
         echo "alert('ท่านไม่มีสิทธิ์การเข้าใช้งาน');";
         echo "window.location='../../../index.php';";
         echo "</script>";
-    }        
+    }
 }else{
 include '../../../control/connect/condb.php';
 include '../../../control/connect/conbuybooking.php';
@@ -115,7 +115,7 @@ img
     <!-- DataTable -->
     <script src="../../../DataTables/datatables.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="../../../js/main.js"></script> 
+    <script src="../../../js/main.js"></script>
     <script src="../../../js/popper.js"></script>
     <script src="../../../js/bootstrap.min.js"></script>
 </body>

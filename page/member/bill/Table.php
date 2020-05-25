@@ -50,12 +50,14 @@
         </button>
       </div>
       <div class="modal-body">
-	  	<p>รหัส : <?php  echo $row["Bo_id"]; ?></p>
+	  	  <p>รหัส : <?php  echo $row["Bo_id"]; ?></p>
         <p>ชื่อลูกค้า : <?php echo $row["C_name"]; ?></p>
         <p>ที่อยู่ลูกค้า : <?php echo $row["C_add"]; ?></p>
         <p>เบอร์โทรลูกค้า : <?php echo $row["C_tel"]; ?></p>
-        <p>วันที่รับ-ส่ง : <?php echo $row['get_date']; ?></p>
-        <p>ประเภทการส่ง : <?php echo $row['get_name']; ?></p>
+					<div class="form-group">
+						<label>วันที่ผู้จองมารับจริง</label>
+						<input type="date" name="date" id="date" class="form-control" onchange="" min="0" maxlength="7" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')">
+					</div>
         <input type="hidden" value="<?php  echo $row["id"]; ?>" id="id" name="id">
       </div>
       <div class="modal-footer">

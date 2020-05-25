@@ -18,7 +18,7 @@
 	  		<h1><div class="logo"><?php echo $_SESSION["Fname"]." ".$_SESSION["Lname"]; ?></div></h1>
         <ul class="list-unstyled components mb-5">
         <li>
-            <a href="../customer/Main.php"><span class="fa fa-user-circle mr-3"></span> ทะเบียนลูกค้าที่สั่งจอง</a>
+            <a href="../customer/Main.php"><span class="fa fa-user-circle mr-3"></span> ทะเบียนลูกค้า</a>
         </li>
         <li>
             <a href="../Cart/Main.php"><span class="fa fa-shopping-cart mr-3"></span> ตะกร้าสินค้า</a>
