@@ -6,16 +6,16 @@ $total_price = 0;
 $total_buy = 0;
 $total_amount = 0;
 
-$cid = "SELECT * FROM buy";
-$q = $condb->query($cid);
+$boid = "SELECT COUNT(*) AS num_rows FROM buy";
+$q = $condb->query($boid);
 $result = mysqli_fetch_array($q, MYSQLI_ASSOC);
-echo $result["id"];
-if($result["id"] == 0){
-  $count = 1;
-  // echo $count;
-}else{
-  $count = $result["id"]+1;
-  // echo $count;
+// echo $result["num_rows"];
+if($result["num_rows"] == 0){
+    $count = 1;
+    // echo $count;
+}
+else {
+    $count = $result["num_rows"] + 1;
 }
 
 if(isset($_SESSION["cart_item"])) {
@@ -53,7 +53,7 @@ if($quantity > $unit){
         exit();
 }
 else{
-$sql2 = "INSERT INTO `buy_detail`(`B_id`, `P_id`, `B_amount`, `B_price`) 
+$sql2 = "INSERT INTO `buy_detail`(`B_id`, `P_id`, `B_amount`, `B_price`)
                           VALUES ('".$count."', '".$id."', '".$quantity."', '".$item_price."')";
 // echo $sql2;
 // echo "<br>";
@@ -65,19 +65,19 @@ if($query2){
     // echo "<script>";
     // echo "alert('ไม่สามารถทำรายการได้');";
     // echo "window.location='../../page/member/Cart/Main.php';";
-    // echo "</script>"; 
+    // echo "</script>";
 }
 else{
     unset($_SESSION["cart_item"]);
     echo "<script>";
     echo "alert('ไม่สามารถทำรายการได้');";
     echo "window.location='../../page/member/Cart/Main.php';";
-    echo "</script>"; 
-} 
+    echo "</script>";
+}
     }
    }
  }
- $sql = "INSERT INTO `buy`(`B_id`, `M_id`, `B_total_amount`, `B_total_price`, `B_date`) 
+ $sql = "INSERT INTO `buy`(`B_id`, `M_id`, `B_total_amount`, `B_total_price`, `B_date`)
         VALUES ('".$count."', '".$seller."', '".$total_amount."', '".$total_price."', CURDATE())";
 //  echo $sql;
 //  echo "<br>";
@@ -87,7 +87,7 @@ if($query){
     echo "<script>";
     echo "alert('ทำรายการเสร็จสิ้น');";
     echo "window.location='../../page/member/Cart/Main.php';";
-    echo "</script>";     
+    echo "</script>";
     }
 else{
     unset($_SESSION["cart_item"]);

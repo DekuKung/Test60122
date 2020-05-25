@@ -77,7 +77,7 @@ if($quantity > $unit){
     exit();
   }
   else{
-        $sql2 = "INSERT INTO `booking_detail`(`Bo_id`, `P_id`, `Bo_amount`, `Bo_price`) 
+        $sql2 = "INSERT INTO `booking_detail`(`Bo_id`, `P_id`, `Bo_amount`, `Bo_price`)
         VALUES ('".$count."', '".$id."', '".$quantity."', '".$item_price."')";
         // echo $sql2;
         // echo "<br>";
