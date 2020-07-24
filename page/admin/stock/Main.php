@@ -7,7 +7,7 @@ if(!$_SESSION["status"]){
         echo "alert('ท่านไม่มีสิทธิ์การเข้าใช้งาน');";
         echo "window.location='./index.php';";
         echo "</script>";
-    }        
+    }
 }else{
 include '../../../control/connect/condb.php';
 $sql = "SELECT * FROM stock_product";
@@ -67,14 +67,14 @@ img
             "sProcessing": "กำลังดำเนินการ...",
             "sSearch": "ค้นหา: ",
             "sZeroRecords": "ไม่พบข้อมูล",
-            "oPaginate": 
+            "oPaginate":
             {
             "sFirst": "หน้าแรก",
             "sPrevious": "ก่อนหน้า",
             "sNext": "ถัดไป",
             "sLast": "หน้าสุดท้าย"
             },
-            "oAria": 
+            "oAria":
             {
             "sSortAscending": ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
             "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
@@ -82,33 +82,32 @@ img
         }
     });
 
-    function checkpname()
-    {
-        var pname = document.getElementById('pname').value; // Get Value By id = fname in Table
-        var nump = pname.length;  // Length's fname To Check Length in Requirement in non-functional requirement
-        document.getElementById('pn').innerHTML = ""; //Clear Text Warning Error
-        // Check First Name Thai
+    function checkpname() {
+        var pname = document.getElementById('cpname').value;
+        var numpn = pname.length;
+        // alert(pname);
         if(!pname.match(/^([ก-๏\s])+$/i))
-        {
-            document.getElementById('pname').value = ""; // Clear Input Text
-            document.getElementById('pn').style.color = "red"; // Warning Style
-            document.getElementById("pn").innerHTML = "กรอกได้เฉพาะตัวอักษรภาษาไทยเท่านั้น"; // Warning Text
-        }
-        else if(nump < 2) // Check Length min
-        {
-            document.getElementById('pn').style.color = "red" // Warning Style
-            document.getElementById('pn').innerHTML = "กรุณากรอกข้อมูลมากกว่า 2 ตัวอักษร" // Warning Text
-            document.getElementById('pname').innerHTML = "" // Clear Input Text
+{
+document.getElementById('cpname').value = ""; // Clear Input Text
+document.getElementById('pna').style.color = "red"; // Warning Style
+document.getElementById("pna").innerHTML = "กรอกได้เฉพาะตัวอักษรภาษาไทยเท่านั้น"; // Warning Text
+}
+else if(numpn < 2){ // Check Length min
+document.getElementById('pna').style.color = "red" // Warning Style
+document.getElementById('pna').innerHTML = "กรุณากรอกข้อมูลมากกว่า 2 ตัวอักษร" // Warning Text
+document.getElementById('cpname').innerHTML = "" // Clear Input Text
 
-        }
-        else if(nump > 25) // Check Length max
-        {
-            document.getElementById('pn').style.color = "red" // Warning Style
-            document.getElementById('pn').innerHTML = "กรุณากรอกข้อมูลน้อยกว่า 25 ตัวอักษร" // Warning Text
-            document.getElementById('pname').innerHTML = "" // Clear Input Text
-        }
+}
+else if(numpn > 25) // Check Length max
+{
+document.getElementById('pna').style.color = "red" // Warning Style
+document.getElementById('pna').innerHTML = "กรุณากรอกข้อมูลน้อยกว่า 25 ตัวอักษร" // Warning Text
+document.getElementById('cpname').innerHTML = "" // Clear Input Text
+}
+else{
+document.getElementById("pna").innerHTML = ""
+}
     }
-
     </script>
 </body>
 

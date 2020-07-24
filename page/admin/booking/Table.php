@@ -22,10 +22,10 @@
         			<tr>
 					<td><?php echo $row["Bo_id"]; ?></td>
                         <td><?php echo $row["C_name"]; ?></td>
-						<td><?php echo $row['total_amount']." แก้ว";?></td>
-            			<td><?php echo $row['total_price']." บาท"; ?></td>
-                        <td><?php echo $row['date']; ?></td>
-                        <td><?php echo $row['get_date']; ?></td>
+						<td><?php echo $row['Bo_total_amount']." แก้ว";?></td>
+            			<td><?php echo $row['Bo_total_price']." บาท"; ?></td>
+                        <td><?php echo $row['Bo_date']; ?></td>
+                        <td><?php echo $row['Bo_getdate']; ?></td>
                         <td><?php echo $row['get_name']; ?></td>
                         <td><?php echo $row['bill_name']; ?></td>
                         <td align="center"><a href="#" data-target="#dataModal<?php echo $row['Bo_id']; ?>" class="btn btn btn-warning" data-toggle="modal" >รายละเอียด</a></td>
@@ -86,10 +86,10 @@
         			<tr>
 					    <td><?php echo $result["id"]; ?></td>
                         <td><?php echo $result["C_name"]; ?></td>
-						<td><?php echo $result['total_amount']." แก้ว";?></td>
-            			<td><?php echo $result['total_price']." บาท"; ?></td>
-                        <td><?php echo $result['date']; ?></td>
-                        <td><?php echo $result['get_date']; ?></td>
+						<td><?php echo $result['Bo_total_amount']." แก้ว";?></td>
+            			<td><?php echo $result['Bo_total_price']." บาท"; ?></td>
+                        <td><?php echo $result['Bo_date']; ?></td>
+                        <td><?php echo $result['Bo_getdate']; ?></td>
                         <td><?php echo $result['get_name']; ?></td>
                         <td><?php echo $result['bill_name']; ?></td>
                         <td align="center"><a href="#" data-target="#billdataModal<?php echo $result['id']; ?>" class="btn btn btn-warning" data-toggle="modal" >รายละเอียด</a></td>

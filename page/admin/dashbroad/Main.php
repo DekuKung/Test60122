@@ -16,13 +16,13 @@ $query = $condb->query($sql);
 $sqlstock = "SELECT * FROM stock_product";
 $qchecks = $condb->query($sqlstock);
 while ($rows = mysqli_fetch_array($qchecks,MYSQLI_ASSOC)){
-    if($rows["P_amount"] == 0){
-        $alert = "ตอนนี้ ".$rows["P_name"]." หมดแล้ว ";
+    if($rows["amount"] == 0){
+        $alert = "ตอนนี้ ".$rows["name"]." หมดแล้ว ";
         echo "<script>";
         echo "alert('$alert');";
         echo "</script>";
-}else if($rows["P_amount"] < 10){
-        $alert = "ตอนนี้ ".$rows["P_name"]." เหลือแค่ ".$rows["P_amount"]." แก้ว กรุณาเติมสินค้า";
+}else if($rows["amount"] < 10){
+        $alert = "ตอนนี้ ".$rows["name"]." เหลือแค่ ".$rows["amount"]." แก้ว กรุณาเติมสินค้า";
         echo "<script>";
         echo "alert('$alert');";
         echo "</script>";
@@ -38,7 +38,7 @@ $totalbo = $condb->query($sqltotalbo);
 $sqltotalm = "SELECT COUNT(A.M_id) AS Total FROM member AS A WHERE A.M_Status = 2";
 $totalm = $condb->query($sqltotalm);
 //totalstock
-$sqltotalst = "SELECT SUM(A.P_amount) AS Totalstock FROM stock_product AS A";
+$sqltotalst = "SELECT SUM(A.amount) AS Totalstock FROM stock_product AS A";
 $totalst = $condb->query($sqltotalst);
 ?>
 <!DOCTYPE html>

@@ -11,23 +11,19 @@ if(!$_SESSION["status"]){
 }else{
 include '../../../control/connect/condb.php';
 $sql ="SELECT * FROM booking AS A
-INNER JOIN customer AS C
-ON A.C_id = C.C_id
-INNER JOIN get_tb AS D 
-ON A.get_id = D.get_id
-INNER JOIN bill_tb AS E
-ON A.bill_id = E.bill_id
-WHERE A.bill_id = 1 ";
+INNER JOIN member AS B ON A.M_id = B.M_id
+INNER JOIN customer AS C ON A.C_id = C.C_id
+INNER JOIN get_tb AS D ON A.get_type = D.get_id
+INNER JOIN bill_tb AS E ON A.bill_type = E.bill_id
+WHERE A.bill_type = 1";
 $query = $condb->query($sql);
 
 $sql2 ="SELECT * FROM booking AS A
-INNER JOIN customer AS C
-ON A.C_id = C.C_id
-INNER JOIN get_tb AS D 
-ON A.get_id = D.get_id
-INNER JOIN bill_tb AS E
-ON A.bill_id = E.bill_id
-WHERE A.bill_id = 2";
+INNER JOIN member AS B ON A.M_id = B.M_id
+INNER JOIN customer AS C ON A.C_id = C.C_id
+INNER JOIN get_tb AS D ON A.get_type = D.get_id
+INNER JOIN bill_tb AS E ON A.bill_type = E.bill_id
+WHERE A.bill_type = 2";
 $query2 = $condb->query($sql2);
 ?>
 <!doctype html>

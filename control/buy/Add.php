@@ -77,8 +77,9 @@ else{
     }
    }
  }
- $sql = "INSERT INTO `buy`(`B_id`, `M_id`, `B_total_amount`, `B_total_price`, `B_date`)
-        VALUES ('".$count."', '".$seller."', '".$total_amount."', '".$total_price."', CURDATE())";
+ $bill_number = '0'.$count.'2563';
+ $sql = "INSERT INTO `buy`(`B_id`, `M_id`, `B_number`, `B_total_amount`, `B_total_price`, `B_date`, `Bo_id`)
+                    VALUES ('".$count."', '".$seller."', '".$bill_number."' , '".$total_amount."', '".$total_price."', CURDATE() , null)";
 //  echo $sql;
 //  echo "<br>";
 $query = $condb->query($sql);
