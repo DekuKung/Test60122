@@ -18,27 +18,16 @@ $result = mysqli_fetch_array($query,MYSQLI_ASSOC);
 $sql2 = "SELECT DISTINCT * FROM buy AS A WHERE A.M_id = '".$id."'";
 $query2 = $condb->query($sql2);
 
-$sql3 ="SELECT * FROM booking AS A
-INNER JOIN customer AS C
-ON A.C_id = C.C_id
-INNER JOIN get_tb AS D 
-ON A.get_id = D.get_id
-INNER JOIN bill_tb AS E
-ON A.bill_id = E.bill_id
-WHERE A.M_id = '".$id."' 
-AND A.bill_id = 2 ";
-$query3 = $condb->query($sql3);
-
 $datecheck = "SELECT CURDATE() AS checkdate";
 $qdate = $condb->query($datecheck);
 $datech = mysqli_fetch_array($qdate, MYSQLI_ASSOC);
 // echo $datech["checkdate"];
-$sqlcheck = "SELECT * FROM booking AS A INNER JOIN customer AS B ON A.C_id = B.C_id WHERE M_id = '".$id."' AND bill_id = 1 ";
+$sqlcheck = "SELECT * FROM booking AS A INNER JOIN customer AS B ON A.C_id = B.C_id WHERE M_id = '".$id."' AND bill_type = 1 ";
 $querycheck = $condb->query($sqlcheck);
 while ($bookdate = mysqli_fetch_array($querycheck, MYSQLI_ASSOC)){
     // echo $bookdate["date"];
     // echo $datech["checkdate"];
- if ($bookdate["get_date"] == $datech["checkdate"]){
+ if ($bookdate["Bo_getdate"] == $datech["checkdate"]){
     $massage = "การจองของ คุณ ".$bookdate["C_name"]." ถึงเวลาการส่งมอบแล้ว";
     echo "<script>";
     echo "alert('$massage');";

@@ -70,7 +70,7 @@
 							<input type="Date"  name="getdate2" id="getdate2" class="form-control" oninvalid="this.setCustomValidity('กรุณาเลือกวันที่')" required>
                         </div>
                         <select class="form-control" name="gettype2" id="gettype2" required oninvalid="this.setCustomValidity('กรุณาเลือก')">
-                    <option value="" required><-- กรุณาเลือกประเภทการจัดส่ง --></option>                         
+                    <option value="" required><-- กรุณาเลือกประเภทการจัดส่ง --></option>
                                 <option value="1">มารับสินค้าเอง</option>
                                 <option value="1">จัดส่งสินค้าให้</option>
                             </select>
@@ -109,12 +109,12 @@
         <p>เบอร์โทรลูกค้า : <p class="tel"></p></p>
         <p>วันที่รับ-ส่ง : <p class="date"></p></p>
         <p>ประเภทการส่ง : <p class="type"></p></p>
-        <input type="text" value="" id="id" name="id">
-        <input type="text" value="" id="name" name="name">
-        <input type="text" value="" id="add" name="add">
-        <input type="text" value="" id="phone" name="phone">
-        <input type="text" value="" id="getdate" name="getdate">
-        <input type="text" value="" id="gettype" name="gettype">
+        <input type="text" hidden="true" value="" id="id" name="id">
+        <input type="text" hidden="true" value="" id="name" name="name">
+        <input type="text" hidden="true" value="" id="add" name="add">
+        <input type="text" hidden="true" value="" id="phone" name="phone">
+        <input type="text" hidden="true" value="" id="getdate" name="getdate">
+        <input type="text" hidden="true" value="" id="gettype" name="gettype">
         <?php echo $order_details; ?>
       </div>
       <div class="modal-footer">

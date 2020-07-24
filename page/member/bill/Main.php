@@ -12,26 +12,18 @@ if(!$_SESSION["status"]){
 $id = $_SESSION["id"];
 include '../../../control/connect/condb.php';
 $sql = "SELECT * FROM booking AS A
-INNER JOIN member AS B 
-ON A.M_id = B.M_id
-INNER JOIN customer AS C 
-ON A.C_id = C.C_id
-INNER JOIN get_tb AS D 
-ON A.get_id = D.get_id
-INNER JOIN bill_tb AS E 
-ON A.bill_id = E.bill_id
-WHERE A.M_id = '".$id."' AND A.bill_id = 1 ";
+INNER JOIN get_tb AS B ON A.get_type = B.get_id
+INNER JOIN bill_tb AS C ON A.bill_type = C.bill_id
+INNER JOIN customer AS D ON A.C_id = D.C_id
+INNER JOIN member AS E ON A.M_id = E.M_id
+WHERE A.M_id = '".$id."' AND A.bill_type = 1 ";
 
 $sql2="SELECT * FROM booking AS A
-INNER JOIN member AS B 
-ON A.M_id = B.M_id
-INNER JOIN customer AS C 
-ON A.C_id = C.C_id
-INNER JOIN get_tb AS D 
-ON A.get_id = D.get_id
-INNER JOIN bill_tb AS E 
-ON A.bill_id = E.bill_id
-WHERE A.M_id = '".$id."' AND A.bill_id = 2 ";
+INNER JOIN get_tb AS B ON A.get_type = B.get_id
+INNER JOIN bill_tb AS C ON A.bill_type = C.bill_id
+INNER JOIN customer AS D ON A.C_id = D.C_id
+INNER JOIN member AS E ON A.M_id = E.M_id
+WHERE A.M_id = '".$id."' AND A.bill_type = 2 ";
 $query = $condb->query($sql);
 $query2 = $condb->query($sql2);
 ?>
@@ -74,7 +66,7 @@ img
     <!-- DataTable -->
     <script src="../../../DataTables/datatables.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="../../../js/main.js"></script> 
+    <script src="../../../js/main.js"></script>
     <script src="../../../js/popper.js"></script>
     <script src="../../../js/bootstrap.min.js"></script>\
     <script>
@@ -86,7 +78,7 @@ img
         });
     });
 
-        $('#Ptable').dataTable({
+        $('#Botable').dataTable({
             "oLanguage": {
             "sEmptyTable": "ไม่มีข้อมูลในตาราง",
             "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",

@@ -77,7 +77,7 @@
 					</div>
 					<div class="form-group">
 						<label></label>
-						<input type="text" value="<?php echo $result['name'];?>" name="pname" id="pname" class="form-control" onchange="checkpname();" maxlength="25" minlength="2" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')" readonly><p id="pn"></p>
+						<input type="text" value="<?php echo $result['name'];?>" name="pname" id="pname" class="form-control" maxlength="25" minlength="2" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')" readonly>
 					</div>
 					<div class="form-group">
 						<label>จำนวนที่นำเข้า</label>
@@ -120,44 +120,42 @@
 			</div>
 		</div>
 	</div>
-    <?php } ?>
-			</tbody>
-			</table>
-			</div>
-		</div>
-		</div>
-
-	<!-- Edit Modal HTML -->
+	<?php } ?>
+	<!-- Add Modal HTML -->
 	<div id="createModal" class="modal fade" >
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form method="POST" action="../../../control/stock/Edit.php">
+				<form method="POST" action="../../../control/stock/create.php" enctype="multipart/form-data">
 					<div class="modal-header">
-						<h4 class="modal-title">แก้ไขข้อมูลสินค้า</h4>
+						<h4 class="modal-title">เพิ่มข้อมูลสินค้า</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
 					<div class="form-group">
 						<label>ชื่อสินค้า</label>
-						<input type="text" value="" name="pname" id="pname" class="form-control" onchange="checkpname();" maxlength="25" minlength="2" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')"><p id="pn"></p>
+						<input type="text" name="cpname" id="cpname" class="form-control" onchange="checkpname()" maxlength="25" minlength="2" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')"><p id="pna"></p>
 					</div>
 					<div class="form-group">
 						<label>จำนวนที่นำเข้า</label>
-						<input type="number" value="" name="amount" id="amount" class="form-control" onchange="" min="0" maxlength="7" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')">
+						<input type="number" name="amount" id="amount" class="form-control" onchange="" min="0" maxlength="7" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')">
 					</div>
 					<div class="form-group">
 						<label>ราคาต่อหน่วย</label>
-						<input type="number" value="" name="price" id="price" class="form-control" onchange="" min="0" maxlength="7" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')">
+						<input type="number" name="price" id="price" class="form-control" onchange="" min="0" maxlength="7" required oninvalid="this.setCustomValidity('กรุณากรอกข้อมูล')">
 					</div>
-					<input type="file" name="fileToUpload" id="fileToUpload">
+					<input type="file" name="upload" id="upload">
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="ยกเลิก">
-						<input type="submit" class="btn btn-success" value="แก้ไข">
+						<input type="submit" class="btn btn-success" value="เพิ่มสินค้า">
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	<!--End Edit Modal -->
-	<!--End Delete Modal -->
+	<!--End Add Modal -->
+			</tbody>
+			</table>
+			</div>
+		</div>
+		</div>

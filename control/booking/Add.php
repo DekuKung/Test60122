@@ -77,7 +77,7 @@ if($quantity > $unit){
     exit();
   }
   else{
-        $sql2 = "INSERT INTO `booking_detail`(`Bo_id`, `P_id`, `Bo_amount`, `Bo_price`) 
+        $sql2 = "INSERT INTO `booking_detail`(`Bo_id`, `P_id`, `Bo_amount`, `Bo_price`)
         VALUES ('".$count."', '".$id."', '".$quantity."', '".$item_price."')";
         // echo $sql2;
         // echo "<br>";
@@ -99,8 +99,8 @@ if($quantity > $unit){
             }
           }
         }
-$sql = "INSERT INTO `booking`(`Bo_id`, `M_id`, `C_id`, `Bo_total_amount`, `total_price`, `Bo_date`, `Bo_getdate`, `get_id`, `bill_id`) 
-                      VALUES ('".$count."', '".$seller."', '".$cid."', '".$total_amount."', '".$total_price."', CURDATE(), '".$cda."', '".$ctype."', 1)";
+$sql = "INSERT INTO `booking`(`Bo_id`, `$seller`, `C_id`, `Bo_total_amount`, `Bo_total_price`, `Bo_date`, `Bo_getdate`, `get_type`, `bill_type`)
+                      VALUES ('$count','$id','$cid', '$total_amount', '$total_price', CURDATE(), '$cdate', '$ctype', 1)";
 //  echo $sql;
 $query = $condb->query($sql);
 if($query){
@@ -146,12 +146,12 @@ $qcheck = $condb->query($check);
 $result  = mysqli_fetch_array($qcheck,MYSQLI_ASSOC);
 $unit = $result["amount"];
 
-echo " id :".$id."<br>";
-echo " name :".$pname."<br>";
-echo " quantity :".$quantity."<br>";
-echo "price :".$price."<br>";
-echo " total :".$total_price."<br>";
-echo "total amount : ".$total_amount."<br>";
+// echo " id :".$id."<br>";
+// echo " name :".$pname."<br>";
+// echo " quantity :".$quantity."<br>";
+// echo "price :".$price."<br>";
+// echo " total :".$total_price."<br>";
+// echo "total amount : ".$total_amount."<br>";
 // echo $cname."<br>";
 // echo $cadd."<br>";
 // echo $ctel."<br>";
@@ -190,8 +190,8 @@ if($quantity > $unit){
             }
           }
         }
-$sql = "INSERT INTO `booking`(`Bo_id`, `M_id`, `C_id`, `Bo_total_amount`, `total_price`, `Bo_date`, `Bo_getdate`, `get_id`, `bill_id`)
-VALUES ('".$count."', '".$seller."', '".$cid."', '".$total_amount."', '".$total_price."', CURDATE(), '".$cda."', '".$ctype."', 1)";
+$sql = "INSERT INTO `booking`(`Bo_id`, `M_id`, `C_id`, `Bo_total_amount`, `Bo_total_price`, `Bo_date`, `Bo_getdate`, `get_type`, `bill_type`)
+                      VALUES ('$count','$seller','$cid', '$total_amount', '$total_price', CURDATE(), '$cdate', '$ctype', 1)";
 //  echo $sql;
 $query = $condb->query($sql);
 if($query){

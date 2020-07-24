@@ -7,7 +7,7 @@ if(!$_SESSION["status"]){
         echo "alert('ท่านไม่มีสิทธิ์การเข้าใช้งาน');";
         echo "window.location='./index.php';";
         echo "</script>";
-    }        
+    }
 }else{
 include '../../../control/connect/condb.php';
 $total_price = 0;
@@ -15,16 +15,16 @@ $total_buy = 0;
 $total_amount = 0;
 $item_details = '';
 
-$cid = "SELECT * FROM buy";
-$q = $condb->query($cid);
+$boid = "SELECT COUNT(*) AS num_rows FROM buy";
+$q = $condb->query($boid);
 $result = mysqli_fetch_array($q, MYSQLI_ASSOC);
-// echo $result["id"];
-if($result["id"] == 0){
-  $count = 1;
-  // echo $count;
-}else{
-  $count = $result["id"]+1;
-  // echo $count;
+// echo $result["num_rows"];
+if($result["num_rows"] == 0){
+    $count = 1;
+    // echo $count;
+}
+else {
+    $count = $result["num_rows"] + 1;
 }
 
 $order_details = '

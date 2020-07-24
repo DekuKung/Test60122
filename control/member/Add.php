@@ -17,7 +17,7 @@ $mdpass = md5($pass);
 // echo $tel;
 // echo $mdpass;
 
-$sql = "INSERT INTO `member`(`id`, `M_Fname`, `M_Lname`, `M_user`, `M_pass`, `M_add`, `M_tel`, `M_Status`) 
+$sql = "INSERT INTO `member`(`M_id`, `M_Fname`, `M_Lname`, `M_user`, `M_pass`, `M_add`, `M_tel`, `M_Status`)
                      VALUES (null, '".$fname."', '".$lname."', '".$user."', '".$mdpass."', '".$add."', '".$tel."', 2)";
 $query = $condb->query($sql);
 if($query)

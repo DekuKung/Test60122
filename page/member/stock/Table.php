@@ -32,7 +32,7 @@
 	<div id="editModal<?php echo $result['id'];?>" class="modal fade" >
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form method="POST" action="../../../control/stock/Update.php">
+				<form method="POST" action="../../../control/stock/UpdateMem.php">
 					<div class="modal-header">
 						<h4 class="modal-title">นำเข้าสินค้า</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

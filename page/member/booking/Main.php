@@ -103,13 +103,13 @@ if(!$_SESSION["status"]){
       <?php     $boid = "SELECT * FROM booking";
     $qb = $condb->query($boid);
     while ($result = mysqli_fetch_array($qb, MYSQLI_ASSOC)){
-    echo $result["Bo_id"];
+    // echo $result["Bo_id"];
     if($result["Bo_id"] == ''){
         $count = 1;
-        echo $count;
+        // echo $count;
     }else{
         $count = $result["Bo_id"]+1;
-        echo $count;
+        // echo $count;
     }
 }
  include './Page.php'; ?>
@@ -144,7 +144,7 @@ $(document).ready(function(){
                     $('#ctel2').val(data.result.C_tel);
                 }else{
                     alert("User not found...");
-                } 
+                }
             }
         });
     });
@@ -182,7 +182,7 @@ $(document).ready(function(){
         $('#getdate').val(date);
         $('#gettype').val(type);
         $('#payModal').modal("show");
-        
+
         }
     });
 
